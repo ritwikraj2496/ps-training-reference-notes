@@ -37,6 +37,8 @@ Git is a widely-used version control system that allows developers to store code
 
 ---
 
+---
+
 # Git Architecture
 
 _reference diagram 1_
