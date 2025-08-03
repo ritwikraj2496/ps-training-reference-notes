@@ -5,7 +5,7 @@
 Version control is the practice of tracking and managing changes to your software code over time. It helps teams collaborate, monitor history, and recover from mistakes.
 
 ## Version Control System (VCS)
- 
+
 A Version Control System is a tool that records every modification made to your codebase. It enables collaboration, rollback of changes, and structured development workflows.
 
 ## What is Git?
@@ -35,12 +35,16 @@ Git is a widely-used version control system that allows developers to store code
 - **Powerful Branching & Merging**: Supports parallel development and collaboration
 - **Staging Area**: Offers a snapshot of changes before committing, allowing fine-grained control
 
+---
+
 # Git Architecture
 
+_reference diagram 1_
 ![git-architecture1](./images/git_arch1.png)
-reference diagram 1
+
+_reference diagram 2_
+
 ![git-architecture2](./images/git_arch2.png)
-reference diagram 2
 
 ## GitHub vs Bitbucket
 
@@ -74,8 +78,6 @@ reference diagram 2
 - `git config --global --replace-all user.name "Ritwik Raj"`  
   → Updates your Git username globally by replacing any existing user.name setting; `--replace-all` ensures the value is fully overwritten.
 
----
-
 ## Repository Initialization & Status
 
 - `git init`  
@@ -83,8 +85,6 @@ reference diagram 2
 
 - `git status`  
   → Shows the current state of files (staged, unstaged, untracked).
-
----
 
 ## Staging Changes
 
@@ -97,8 +97,6 @@ reference diagram 2
 - `git add -A`  
   → Stages all changes (including deletions); `-A` = All changes (modified, new, deleted).
 
----
-
 ## Undoing Changes
 
 - `git checkout filename`  
@@ -107,14 +105,10 @@ reference diagram 2
 - `git checkout <commit-hash>`  
   → Checks out a previous commit by its hash (detached head).
 
----
-
 ## Committing Changes
 
 - `git commit -m "first commit"`  
   → Commits staged changes with a message; `-m` = message.
-
----
 
 ## Viewing Changes
 
@@ -126,8 +120,6 @@ reference diagram 2
 
 - `git diff HEAD`  
   → Shows differences between working directory and the last commit.
-
----
 
 ## Viewing Commit History & Info
 
@@ -146,8 +138,6 @@ reference diagram 2
 - `git log --oneline`  
   → Shows the commit history in a compact, one-line-per-commit format; useful for quickly identifying commit IDs.
 
----
-
 ## Removing Files
 
 - `git rm contact.html`  
@@ -158,8 +148,6 @@ reference diagram 2
 
 - `git rm --cached about.html`  
   → Unstages a file without deleting it from the working directory; `--cached` = remove from staging area only.
-
----
 
 ## Branching & Navigation
 
@@ -184,8 +172,6 @@ reference diagram 2
 - `git branch -vv`  
   → Lists all local branches along with the remote branch each one is tracking; `-vv` = verbose twice, for extra tracking info.
 
----
-
 ## Merging Branches
 
 - `git checkout master`  
@@ -196,8 +182,6 @@ reference diagram 2
 
 Note: Always switch to the branch you want to merge into (typically master or main).
 
----
-
 ## Working with Files
 
 - `rm register.html`  
@@ -206,14 +190,10 @@ Note: Always switch to the branch you want to merge into (typically master or ma
 - `.gitignore`  
   → A special file used to tell Git which files or folders to ignore (not track).
 
----
-
 ## Combining Staging & Committing
 
 - `git add -A && git commit -m "final commit"`  
   → Stages all changes and commits them with a message in one command; `-A` = all changes, `-m` = commit message.
-
----
 
 ## Managing Remote Repositories
 
@@ -225,13 +205,11 @@ Note: Always switch to the branch you want to merge into (typically master or ma
 
 - `git push -u -f origin master`  
   → Pushes the local master branch to origin, using:  
-    `-u` to set upstream tracking,  
-    `-f` to force-push changes if needed.
+   `-u` to set upstream tracking,  
+   `-f` to force-push changes if needed.
 
 - `git push --set-upstream origin test-branch`  
   → Pushes test-branch to the remote and sets it to track that remote branch going forward.
-
----
 
 ## Fetching & Syncing
 
@@ -241,21 +219,15 @@ Note: Always switch to the branch you want to merge into (typically master or ma
 - `git branch -r`  
   → Lists all remote branches available in the repository.
 
----
-
 ## Deleting Remote Branches
 
 - `git push -d origin feature/test-branch`  
   → Deletes the remote branch `feature/test-branch` from the origin remote; `-d` is short for delete.
 
----
-
 ## Reverting
 
 - `git revert <commit-id>`  
   → Reverts the changes introduced by the specified commit and creates a new commit to undo it.
-
----
 
 ## Stashing Changes
 
@@ -280,82 +252,86 @@ Note: Always switch to the branch you want to merge into (typically master or ma
 ---
 
 # Key Focus Areas for the Production Phase
+
 **What Project Leaders/SMEs look for in a real client standard project:**
 
 ## 1. Thoughtful Branching Model Selection
 
-- Teams must collaboratively decide on a suitable Git branching strategy (e.g., Git Flow, GitHub Flow, Trunk-Based). 
-- The rationale behind the choice must be clearly documented. 
-- Think ahead — consider scenarios like parallel development, hotfixes, patch releases, and rollback situations. 
-*Switching models mid-project is risky and discouraged.*
+- Teams must collaboratively decide on a suitable Git branching strategy (e.g., Git Flow, GitHub Flow, Trunk-Based).
+- The rationale behind the choice must be clearly documented.
+- Think ahead — consider scenarios like parallel development, hotfixes, patch releases, and rollback situations.
+  _Switching models mid-project is risky and discouraged._
 
 ## 2. Well-Designed Branching Strategy & Workflow
 
-- Visualize and share a clear diagram or outline showing: 
-  - **Main branches** (e.g., main, develop) 
-  - **Supporting branches** (e.g., feature/*, release/*, hotfix/*) 
-  - **Branch lifecycle** and merge paths between them 
-- Define team-wide policies for when and how to create, merge, and delete branches. 
+- Visualize and share a clear diagram or outline showing:
+  - **Main branches** (e.g., main, develop)
+  - **Supporting branches** (e.g., feature/_, release/_, hotfix/\*)
+  - **Branch lifecycle** and merge paths between them
+- Define team-wide policies for when and how to create, merge, and delete branches.
 
 ## 3. Team-Wide Naming Conventions
 
-- Decide and **enforce consistent naming patterns** for: 
-  - Feature branches (e.g., feature/user-login) 
-  - Sub-features or tasks (e.g., feature/login/validation) 
-  - Hotfixes (e.g., hotfix/crash-on-start) 
-  - Releases (e.g., release/1.2.0) 
-  - Tags (e.g., v1.2.0) 
-- Avoid ad-hoc or personal styles. **Naming consistency = team clarity**. 
+- Decide and **enforce consistent naming patterns** for:
+  - Feature branches (e.g., feature/user-login)
+  - Sub-features or tasks (e.g., feature/login/validation)
+  - Hotfixes (e.g., hotfix/crash-on-start)
+  - Releases (e.g., release/1.2.0)
+  - Tags (e.g., v1.2.0)
+- Avoid ad-hoc or personal styles. **Naming consistency = team clarity**.
 
 ## 4. Mandatory Semantic Tagging After Each Sprint
 
-- At the end of every sprint or major release: 
-  - Create a **Git tag** using Semantic Versioning (e.g., v1.0.0, v1.1.0) 
-  - Tags should mark stable milestones and help with rollback/debugging. 
-  - Add release notes or tag messages summarizing key features/changes. 
+- At the end of every sprint or major release:
+  - Create a **Git tag** using Semantic Versioning (e.g., v1.0.0, v1.1.0)
+  - Tags should mark stable milestones and help with rollback/debugging.
+  - Add release notes or tag messages summarizing key features/changes.
 
 ## 5. Clear Conflict Resolution Guidelines
 
-- Define a standard approach for resolving Git merge conflicts: 
-  - Who owns the responsibility for resolving them? 
-  - When should team members pull and rebase? 
-  - How to avoid overwriting others’ work? 
-- Encourage **communication before merging** and **reviewing conflicts as a team** when needed. 
+- Define a standard approach for resolving Git merge conflicts:
+  - Who owns the responsibility for resolving them?
+  - When should team members pull and rebase?
+  - How to avoid overwriting others’ work?
+- Encourage **communication before merging** and **reviewing conflicts as a team** when needed.
 
 ## 6. Commit Hygiene
 
-- Encourage developers to make **small, meaningful commits** with clear messages. 
-- Follow conventional commit formats where possible (e.g., feat:, fix:, refactor:). 
-- Avoid lumping multiple unrelated changes into a single commit.  
+- Encourage developers to make **small, meaningful commits** with clear messages.
+- Follow conventional commit formats where possible (e.g., feat:, fix:, refactor:).
+- Avoid lumping multiple unrelated changes into a single commit.
 
 ## 7. Review-Ready Branches
 
-- Ensure all branches are **ready for review** before raising a pull request: 
-  - Code should be linted, tested, and well-commented. 
-  - PRs should include a **summary of changes**, context, and screenshots/logs if applicable. 
-- Encourage peer reviews and early feedback loops. 
+- Ensure all branches are **ready for review** before raising a pull request:
+  - Code should be linted, tested, and well-commented.
+  - PRs should include a **summary of changes**, context, and screenshots/logs if applicable.
+- Encourage peer reviews and early feedback loops.
 
 ## 8. Team Synchronization & Git Hygiene
 
-- Schedule regular sync-ups to align on: 
-  - Merge schedules 
-  - Branch cleanup 
-  - Shared pain points (e.g., frequent conflicts or stale branches) 
-- Use project tracking tools like **Jira, Trello, or GitHub Projects** to **map branches to tasks or stories** for better visibility and traceability. 
+- Schedule regular sync-ups to align on:
+  - Merge schedules
+  - Branch cleanup
+  - Shared pain points (e.g., frequent conflicts or stale branches)
+- Use project tracking tools like **Jira, Trello, or GitHub Projects** to **map branches to tasks or stories** for better visibility and traceability.
 
 ---
 
 # How to Create a Pull Request (PR) in Bitbucket
-*A step-by-step guide to propose, review, and merge your code effectively:*
+
+_A step-by-step guide to propose, review, and merge your code effectively:_
 
 ## 1. Navigate to Your Repository
+
 Open Bitbucket in your browser and go to the repository where you want to raise a PR.
 
 ## 2. Create a New Branch (If Not Already Created)
+
 If your changes aren’t already in a dedicated branch:
 
 - Navigate to the **"Branches"** tab in the repo and click **"Create branch"**
-Or, from terminal:
+  Or, from terminal:
 
 ```bash
 git checkout -b <new-branch-name>
@@ -426,7 +402,8 @@ After merging, **close the PR** to mark it as complete. Bitbucket usually auto-c
 ---
 
 # Branch Management Best Practices
-*Effective collaboration, clean hostory, and streamlined delivery through thoughtful Git branching.*
+
+_Effective collaboration, clean hostory, and streamlined delivery through thoughtful Git branching._
 
 ## 1. Lifecycle Management
 
@@ -475,34 +452,34 @@ After merging, **close the PR** to mark it as complete. Bitbucket usually auto-c
 - **Staging Area (Index)**: Files marked to be committed.
 - **Repository (HEAD/Commit History)**: The actual committed snapshots.
 
-| Command | Scope | Effect |
-|--------|-------|--------|
-| `git checkout -- <file>` | Working Directory | Discards changes in file (reset to last committed state) |
-| `git restore <file>` | Working Directory | Safe undo of file edits (modern alternative to checkout) |
-| `git reset <file>` | Staging Area | Unstage file (keeps changes in working directory) |
-| `git reset --soft HEAD~1` | Commit History (soft) | Undo last commit, keep changes staged |
-| `git reset --mixed HEAD~1` | Commit History + Staging Area | Undo commit, keep files but unstage |
-| `git reset --hard HEAD~1` | Everything | Dangerous – undo last commit and discard changes |
-| `git revert <commit>` | Commit History | Safe – creates a new commit that undoes an old one |
+| Command                    | Scope                         | Effect                                                   |
+| -------------------------- | ----------------------------- | -------------------------------------------------------- |
+| `git checkout -- <file>`   | Working Directory             | Discards changes in file (reset to last committed state) |
+| `git restore <file>`       | Working Directory             | Safe undo of file edits (modern alternative to checkout) |
+| `git reset <file>`         | Staging Area                  | Unstage file (keeps changes in working directory)        |
+| `git reset --soft HEAD~1`  | Commit History (soft)         | Undo last commit, keep changes staged                    |
+| `git reset --mixed HEAD~1` | Commit History + Staging Area | Undo commit, keep files but unstage                      |
+| `git reset --hard HEAD~1`  | Everything                    | Dangerous – undo last commit and discard changes         |
+| `git revert <commit>`      | Commit History                | Safe – creates a new commit that undoes an old one       |
 
 ### When to Use What?
 
-| Scenario | Recommended Command |
-|---------|----------------------|
-| Edited file but want to discard changes | `git restore <file>` or `git checkout -- <file>` |
-| Staged the wrong file | `git reset <file>` |
-| Committed too early (but want to keep changes) | `git reset --soft HEAD~1` |
-| UCommitted wrong files, want to redo | `git reset --mixed HEAD~1` |
-| Want to permanently delete local work | `git reset --hard HEAD~1` |
-| Want to undo a pushed commit (safely) | `git revert <commit>` |
+| Scenario                                       | Recommended Command                              |
+| ---------------------------------------------- | ------------------------------------------------ |
+| Edited file but want to discard changes        | `git restore <file>` or `git checkout -- <file>` |
+| Staged the wrong file                          | `git reset <file>`                               |
+| Committed too early (but want to keep changes) | `git reset --soft HEAD~1`                        |
+| UCommitted wrong files, want to redo           | `git reset --mixed HEAD~1`                       |
+| Want to permanently delete local work          | `git reset --hard HEAD~1`                        |
+| Want to undo a pushed commit (safely)          | `git revert <commit>`                            |
 
-### Understanding the risks - 
+### Understanding the risks -
 
-- reset --hard deletes code forever. Never use without backups. 
-- Rewriting history (e.g., reset or rebase) after pushing will affect collaborators. 
-- revert is safe for public history. 
+- reset --hard deletes code forever. Never use without backups.
+- Rewriting history (e.g., reset or rebase) after pushing will affect collaborators.
+- revert is safe for public history.
 
-### Layman Analogy - 
+### Layman Analogy -
 
 - **Soft reset** = unsending WhatsApp message but keeping it in draft.
 - **Mixed reset** = unsending but keeping the text.
@@ -567,55 +544,58 @@ npm-debug.log
 
 ## git pull vs git fetch
 
-| Command | What it Does | Safe? | Local Merge? |
-|--------|----------------|-------|--------------|
-| `git fetch` | Downloads changes from the remote but does NOT merge into your local branch | ✅ Safe | ❌ No |
-| `git pull` | Fetches + Merges changes from the remote into your current branch | ⚠️ Risk of conflicts | ✅ Yes |
+| Command     | What it Does                                                                | Safe?                | Local Merge? |
+| ----------- | --------------------------------------------------------------------------- | -------------------- | ------------ |
+| `git fetch` | Downloads changes from the remote but does NOT merge into your local branch | ✅ Safe              | ❌ No        |
+| `git pull`  | Fetches + Merges changes from the remote into your current branch           | ⚠️ Risk of conflicts | ✅ Yes       |
 
 ## git revert vs git reset
 
-| Feature | `git revert` | `git reset` |
-|--------|---------------|-------------|
-| What it does | Creates a new commit that undoes a previous commit | Moves the HEAD and branch pointer to a previous commit |
-| Safe for team use | ✅ Yes — keeps history intact | ⚠️ Not safe if changes are already pushed to shared remote |
-| Usage | To undo a commit without rewriting history | To discard commits or change commit history locally |
-| Keeps history | ✅ Yes | ❌ No - rewrites history |
+| Feature           | `git revert`                                       | `git reset`                                                |
+| ----------------- | -------------------------------------------------- | ---------------------------------------------------------- |
+| What it does      | Creates a new commit that undoes a previous commit | Moves the HEAD and branch pointer to a previous commit     |
+| Safe for team use | ✅ Yes — keeps history intact                      | ⚠️ Not safe if changes are already pushed to shared remote |
+| Usage             | To undo a commit without rewriting history         | To discard commits or change commit history locally        |
+| Keeps history     | ✅ Yes                                             | ❌ No - rewrites history                                   |
 
 ## git stash pop vs git stash apply
 
-| Command | What it Does | Deletes the Stash? | Use Case |
-|--------|----------------|--------------------|-----------|
-| `git stash apply` | Applies stashed changes, but keeps the stash in the list | ❌ No | When you want to reuse later |
-| `git stash pop` | Applies stashed changes and then removes them from stash list | ✅ Yes | When you no longer need stash |
+| Command           | What it Does                                                  | Deletes the Stash? | Use Case                      |
+| ----------------- | ------------------------------------------------------------- | ------------------ | ----------------------------- |
+| `git stash apply` | Applies stashed changes, but keeps the stash in the list      | ❌ No              | When you want to reuse later  |
+| `git stash pop`   | Applies stashed changes and then removes them from stash list | ✅ Yes             | When you no longer need stash |
 
 ## Jira and Bitbucket Linking
 
 ### a. Native Integration via Atlassian Cloud
 
-If both your Jira and Bitbucket accounts are under the **same Atlassian organization:** 
+If both your Jira and Bitbucket accounts are under the **same Atlassian organization:**
 
-- The link is often automatic, or you can link manually from: 
-  - Jira → Settings → Products → DVCS accounts → Link Bitbucket 
+- The link is often automatic, or you can link manually from:
+
+  - Jira → Settings → Products → DVCS accounts → Link Bitbucket
 
 - **Steps**:
 
-  - Go to **Jira → Settings → Products → DVCS accounts** 
-  - Click Link Bitbucket Cloud 
-  - Authorize your Bitbucket account 
-  - Select repositories to sync 
-  - Done! You’ll start seeing: 
-    - Bitbucket activity under Jira issues 
-    - Smart commits (git commit -m "PROJ-123 Fix bug") auto-linked 
-    - Pull requests and build status on Jira cards 
+  - Go to **Jira → Settings → Products → DVCS accounts**
+  - Click Link Bitbucket Cloud
+  - Authorize your Bitbucket account
+  - Select repositories to sync
+  - Done! You’ll start seeing:
+    - Bitbucket activity under Jira issues
+    - Smart commits (git commit -m "PROJ-123 Fix bug") auto-linked
+    - Pull requests and build status on Jira cards
 
 ### b. Smart Commits in Git
 
-In commit messages, use Jira issue keys to auto-link and trigger actions: 
+In commit messages, use Jira issue keys to auto-link and trigger actions:
+
 ```bash
 git commit -m "PROJ-101 Fix login bug #comment fixed null error #time 1h #done"
 ```
 
 This can:
+
 - Add comments to issues
 - Log time
 - Transition issue status
@@ -624,12 +604,30 @@ Works only if Bitbucket repo is linked to Jira (via DVCS accounts).
 
 ### c. Branch Naming Conventions
 
-When you create branches like: 
+When you create branches like:
 
 ```bash
 feature/PROJ-123-add-login-form
 ```
 
-Bitbucket automatically detects the Jira key (PROJ-123) and links it back to the Jira issue. 
+Bitbucket automatically detects the Jira key (PROJ-123) and links it back to the Jira issue.
+
+## Git Branching Strategies
+
+**Reference links:**
+- [Choosing the Right Git Branching Strategy: A Comparative Analysis](https://medium.com/@sreekanth.thummala/choosing-the-right-git-branching-strategy-a-comparative-analysis-f5e635443423)
+- [Git Branching Strategies: A Comprehensive Guide](https://dev.to/karmpatel/git-branching-strategies-a-comprehensive-guide-24kh)
+
+
+---
+
+# Reference links for further reading:
+- [Git Documentation](https://git-scm.com/doc)
+- [Atlassian Git Tutorials](https://www.atlassian.com/git/tutorials)
+
+# Game Links for practical exercises:
+- [Git Game](https://learngitbranching.js.org/)
+- [Git Immersion](http://gitimmersion.com/)
+- [Oh My Git!](https://ohmygit.org/) 
 
 ---
