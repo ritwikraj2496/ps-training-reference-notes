@@ -37,10 +37,11 @@ Git is a widely-used version control system that allows developers to store code
 
 # Git Architecture
 
+*reference diagram 1
 ![git-architecture1](./images/git_arch1.png)
-reference diagram 1
+
+*reference diagram 2
 ![git-architecture2](./images/git_arch2.png)
-reference diagram 2
 
 ## GitHub vs Bitbucket
 
