@@ -44,6 +44,7 @@ Git is a widely-used version control system that allows developers to store code
 
 
 *reference diagram 2*
+
 ![git-architecture2](./images/git_arch2.png)
 
 ## GitHub vs Bitbucket
@@ -78,8 +79,6 @@ Git is a widely-used version control system that allows developers to store code
 - `git config --global --replace-all user.name "Ritwik Raj"`  
   → Updates your Git username globally by replacing any existing user.name setting; `--replace-all` ensures the value is fully overwritten.
 
----
-
 ## Repository Initialization & Status
 
 - `git init`  
@@ -87,8 +86,6 @@ Git is a widely-used version control system that allows developers to store code
 
 - `git status`  
   → Shows the current state of files (staged, unstaged, untracked).
-
----
 
 ## Staging Changes
 
@@ -101,8 +98,6 @@ Git is a widely-used version control system that allows developers to store code
 - `git add -A`  
   → Stages all changes (including deletions); `-A` = All changes (modified, new, deleted).
 
----
-
 ## Undoing Changes
 
 - `git checkout filename`  
@@ -111,14 +106,10 @@ Git is a widely-used version control system that allows developers to store code
 - `git checkout <commit-hash>`  
   → Checks out a previous commit by its hash (detached head).
 
----
-
 ## Committing Changes
 
 - `git commit -m "first commit"`  
   → Commits staged changes with a message; `-m` = message.
-
----
 
 ## Viewing Changes
 
@@ -130,8 +121,6 @@ Git is a widely-used version control system that allows developers to store code
 
 - `git diff HEAD`  
   → Shows differences between working directory and the last commit.
-
----
 
 ## Viewing Commit History & Info
 
@@ -150,8 +139,6 @@ Git is a widely-used version control system that allows developers to store code
 - `git log --oneline`  
   → Shows the commit history in a compact, one-line-per-commit format; useful for quickly identifying commit IDs.
 
----
-
 ## Removing Files
 
 - `git rm contact.html`  
@@ -162,8 +149,6 @@ Git is a widely-used version control system that allows developers to store code
 
 - `git rm --cached about.html`  
   → Unstages a file without deleting it from the working directory; `--cached` = remove from staging area only.
-
----
 
 ## Branching & Navigation
 
@@ -188,8 +173,6 @@ Git is a widely-used version control system that allows developers to store code
 - `git branch -vv`  
   → Lists all local branches along with the remote branch each one is tracking; `-vv` = verbose twice, for extra tracking info.
 
----
-
 ## Merging Branches
 
 - `git checkout master`  
@@ -200,8 +183,6 @@ Git is a widely-used version control system that allows developers to store code
 
 Note: Always switch to the branch you want to merge into (typically master or main).
 
----
-
 ## Working with Files
 
 - `rm register.html`  
@@ -210,14 +191,10 @@ Note: Always switch to the branch you want to merge into (typically master or ma
 - `.gitignore`  
   → A special file used to tell Git which files or folders to ignore (not track).
 
----
-
 ## Combining Staging & Committing
 
 - `git add -A && git commit -m "final commit"`  
   → Stages all changes and commits them with a message in one command; `-A` = all changes, `-m` = commit message.
-
----
 
 ## Managing Remote Repositories
 
@@ -235,8 +212,6 @@ Note: Always switch to the branch you want to merge into (typically master or ma
 - `git push --set-upstream origin test-branch`  
   → Pushes test-branch to the remote and sets it to track that remote branch going forward.
 
----
-
 ## Fetching & Syncing
 
 - `git fetch --all`  
@@ -245,21 +220,15 @@ Note: Always switch to the branch you want to merge into (typically master or ma
 - `git branch -r`  
   → Lists all remote branches available in the repository.
 
----
-
 ## Deleting Remote Branches
 
 - `git push -d origin feature/test-branch`  
   → Deletes the remote branch `feature/test-branch` from the origin remote; `-d` is short for delete.
 
----
-
 ## Reverting
 
 - `git revert <commit-id>`  
   → Reverts the changes introduced by the specified commit and creates a new commit to undo it.
-
----
 
 ## Stashing Changes
 
