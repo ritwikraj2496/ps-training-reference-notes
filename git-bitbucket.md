@@ -35,12 +35,15 @@ Git is a widely-used version control system that allows developers to store code
 - **Powerful Branching & Merging**: Supports parallel development and collaboration
 - **Staging Area**: Offers a snapshot of changes before committing, allowing fine-grained control
 
+---
+
 # Git Architecture
 
-*reference diagram 1
+*reference diagram 1*
 ![git-architecture1](./images/git_arch1.png)
 
-*reference diagram 2
+
+*reference diagram 2*
 ![git-architecture2](./images/git_arch2.png)
 
 ## GitHub vs Bitbucket
