@@ -108,6 +108,15 @@ public class SerializeExample {
 {"name":"Anjali","age":22,"isEnrolled":true}
 ```
 
+#### Assignment 1:
+
+```java
+CalculatorResponse resp = new CalculatorResponse(15);
+String jsonString = mapper.writeValueAsString(resp);
+```
+
+- **Convert multiplication result object to JSON.**
+
 ### Convert JSON ➡ Java Object (Deserialization)
 
 **Why?**
@@ -140,6 +149,16 @@ public class DeserializeExample {
 ```
 Anjali - 22
 ```
+
+#### Assignment 2:
+
+```java
+ObjectMapper mapper = new ObjectMapper();
+String json = "{"operation":"add","operand1":10,"operand2":5}";
+CalculatorRequest req = mapper.readValue(json, CalculatorRequest.class);
+```
+
+- **Parse JSON with "multiply" and "divide" operations.**
 
 ---
 
@@ -264,6 +283,36 @@ data.put("duration", 30);
 String jsonOutput = mapper.writeValueAsString(data);
 System.out.println(jsonOutput);
 ```
+
+#### Assignment 3:
+
+JSON:
+
+```json
+{
+  "operations": [
+    {"type":"add","result":15},
+    {"type":"subtract","result":5}
+  ]
+}
+```
+
+Java Parsing:
+
+```java
+class OperationResult {
+    public String type;
+    public int result;
+}
+
+class Operations {
+    public List<OperationResult> operations;
+}
+
+Operations ops = mapper.readValue(jsonString, Operations.class);
+```
+
+- **Add multiplication and division operations to the JSON array and parse them into Java.**
 
 ---
 
