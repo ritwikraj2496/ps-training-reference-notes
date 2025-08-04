@@ -1,0 +1,49 @@
+# ===================
+# Maven Build Folders
+# ===================
+target/
+/json_processing_java/target/
+/junit_testing/target/
+
+# ====================
+# Eclipse/VSCode/IDEA
+# ====================
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# ====================
+# OS-Specific Files
+# ====================
+.DS_Store
+Thumbs.db
+
+# ====================
+# Logs and Temp Files
+# ====================
+*.log
+*.tmp
+*.bak
+
+# ====================
+# Environment Files
+# ====================
+.env
+*.env
+
+# ====================
+# Other Optional Ignores
+# ====================
+# Local Maven repo (only if you store it here, which is rare)
+.mvn/
+
+# Ignore compiled files if any
+*.class
+
+# Ignore Java test output
+surefire-reports/
