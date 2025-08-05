@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.stream.Stream;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -52,5 +50,12 @@ class ParameterizedExamples {
     @MethodSource("provideAddCases")
     void testAddition(int a, int b, int expected) {
         assertEquals(expected, a + b); // Testing addition logic
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideAddCases")
+    void testAddition1(int a, int b, int expected) {
+        // CalculatorService calc = new CalculatorService();
+        assertEquals(expected, CalculatorService.addTwoNumbers(a, b)); // Now using real logic
     }
 }
