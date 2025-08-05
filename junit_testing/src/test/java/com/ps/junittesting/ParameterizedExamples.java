@@ -40,7 +40,7 @@ class ParameterizedExamples {
 
     // Multiple arguments using @MethodSource
     static Stream<Arguments> provideAddCases() {
-        return Stream.of(
+        return Stream.of( // this makes a stream of data - Stream.of()
                 Arguments.of(2, 3, 5),
                 Arguments.of(10, 20, 30),
                 Arguments.of(-1, 1, 0));
@@ -49,13 +49,12 @@ class ParameterizedExamples {
     @ParameterizedTest
     @MethodSource("provideAddCases")
     void testAddition(int a, int b, int expected) {
-        assertEquals(expected, a + b); // Testing addition logic
+        assertEquals(expected, a + b); // Testing addition logic - (expected, actual)
     }
 
     @ParameterizedTest
     @MethodSource("provideAddCases")
     void testAddition1(int a, int b, int expected) {
-        // CalculatorService calc = new CalculatorService();
         assertEquals(expected, CalculatorService.addTwoNumbers(a, b)); // Now using real logic
     }
 }
