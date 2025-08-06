@@ -3,6 +3,7 @@ package com.ps.usertesting.service;
 import com.ps.usertesting.model.User;
 import com.ps.usertesting.repository.UserRepository;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
