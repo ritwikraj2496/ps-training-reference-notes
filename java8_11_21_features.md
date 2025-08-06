@@ -29,10 +29,10 @@ public class PropertiesExample1 {
     public static void main(String[] args) throws Exception {
         Properties props = new Properties();
         props.load(new FileReader("config.properties"));
-        
+
         String dbUrl = props.getProperty("db.url");
         String username = props.getProperty("db.username");
-        
+
         System.out.println("DB URL: " + dbUrl);
         System.out.println("Username: " + username);
     }
@@ -57,7 +57,7 @@ public class PropDemo {
       Properties capitals = new Properties();
       Set states;
       String str;
-      
+
       capitals.put("Illinois", "Springfield");
       capitals.put("Missouri", "Jefferson City");
       capitals.put("Washington", "Olympia");
@@ -67,12 +67,12 @@ public class PropDemo {
       // Show all states and capitals in hashtable.
       states = capitals.keySet();   // get set-view of keys
       Iterator itr = states.iterator();
-      
+
       while(itr.hasNext()) {
          str = (String) itr.next();
-         System.out.println("The capital of " + str + " is " + 
+         System.out.println("The capital of " + str + " is " +
             capitals.getProperty(str) + ".");
-      }     
+      }
       System.out.println();
 
       // look for state not in list -- specify default
@@ -83,6 +83,7 @@ public class PropDemo {
 ```
 
 **Output:**
+
 ```
 The capital of Missouri is Jefferson City.
 The capital of Illinois is Springfield.
@@ -355,6 +356,7 @@ public class Calendar1 {
 ```
 
 **Output:**
+
 ```
 The Current Date is:Wed Aug 06 11:10:40 UTC 2025
 ```
@@ -367,7 +369,7 @@ import java.util.Date;
 
 public class CalendarDemo {
    public static void main(String[] args) {
-   
+
       // create calendar objects.
       Calendar cal = Calendar.getInstance();
       Calendar future = Calendar.getInstance();
@@ -381,7 +383,7 @@ public class CalendarDemo {
 
       // check if calendar date is after current date
       Date time = future.getTime();
-      
+
       if (future.after(cal)) {
          System.out.println("Date " + time + " is after current date.");
       }
@@ -390,6 +392,7 @@ public class CalendarDemo {
 ```
 
 **Output:**
+
 ```
 Current date: Fri Sep 23 14:35:06 IST 2022
 Year is 2025
@@ -407,10 +410,10 @@ public class Calendar3 {
     {
         // creating calendar object
         Calendar calendar = Calendar.getInstance();
-    
+
         int max = calendar.getMaximum(Calendar.DAY_OF_WEEK);
         System.out.println("Maximum number of days in a week: " + max);
-        
+
         max = calendar.getMaximum(Calendar.WEEK_OF_YEAR);
         System.out.println("Maximum number of weeks in a year: " + max);
     }
@@ -418,6 +421,7 @@ public class Calendar3 {
 ```
 
 **Output:**
+
 ```
 Maximum number of days in a week: 7
 Maximum number of weeks in a year: 53
@@ -446,6 +450,7 @@ public class Calendar5 {
 ```
 
 **Output:**
+
 ```
 15 days ago: Mon Aug 13 11:10:57 UTC 2018
 4 months later: Thu Dec 13 11:10:57 UTC 2018
@@ -498,7 +503,7 @@ public class LocaleDemo {
 
       // print locales
       System.out.println("Installed locales are:");
-      
+
       for (int i = 0; i < locales.length; i++) {
          System.out.println(i + ":" + locales[i]);
       }
@@ -522,6 +527,7 @@ public class DefaultLocaleDemo {
 ```
 
 **Output:**
+
 ```
 Default Locale: en_US
 Language: en
@@ -546,6 +552,7 @@ public class DateFormattingDemo {
 ```
 
 **Output:**
+
 ```
 Formatted Date: Wednesday, January 8, 2025
 ```
@@ -568,15 +575,18 @@ public class CurrencyFormattingDemo {
 ```
 
 **Output:**
+
 ```
 98,765.43
 ```
+
+---
 
 ### java.time API
 
 **Introduced in Java 8 – modern way to deal with dates and times (replaces Date, Calendar)**
 
-1. LocalDate
+#### LocalDate
 
 - Represents a date (YYYY-MM-DD) without time or timezone.
 
@@ -596,7 +606,7 @@ public class LocalDateExample {
 }
 ```
 
-2. LocalTime
+#### LocalTime
 
 - Represents a time (HH:MM:SS) without date or timezone.
 
@@ -630,32 +640,32 @@ public class LocalDateTimeExample {
       LocalDateTimeExample java8tester = new LocalDateTimeExample();
       java8tester.testLocalDateTime();
    }
-	
+
    public void testLocalDateTime() {
       // Get the current date and time
       LocalDateTime currentTime = LocalDateTime.now();
       System.out.println("Current DateTime: " + currentTime);
-		
+
       LocalDate date1 = currentTime.toLocalDate();
       System.out.println("date1: " + date1);
-		
+
       Month month = currentTime.getMonth();
       int day = currentTime.getDayOfMonth();
       int seconds = currentTime.getSecond();
-		
+
       System.out.println("Month: " + month +" day: " + day +" seconds: " + seconds);
-		
+
       LocalDateTime date2 = currentTime.withDayOfMonth(10).withYear(2012);
       System.out.println("date2: " + date2);
-		
+
       //12 december 2014
       LocalDate date3 = LocalDate.of(2014, Month.DECEMBER, 12);
       System.out.println("date3: " + date3);
-		
+
       //22 hour 15 minutes
       LocalTime date4 = LocalTime.of(22, 15);
       System.out.println("date4: " + date4);
-		
+
       //parse a string
       LocalTime date5 = LocalTime.parse("20:15:30");
       System.out.println("date5: " + date5);
@@ -663,7 +673,7 @@ public class LocalDateTimeExample {
 }
 ```
 
-3. Period
+#### Period
 
 - Represents a period of time in years, months, days.
 
@@ -686,7 +696,7 @@ public class PeriodExample {
 }
 ```
 
-4. Duration
+#### Duration
 
 - Represents a duration of time in seconds, minutes, etc.
 - Works with time-based classes like LocalTime, Instant.
@@ -726,32 +736,30 @@ public class Java8Tester {
       java8tester.testPeriod();
       java8tester.testDuration();
    }
-	
+
    public void testPeriod() {
       //Get the current date
       LocalDate date1 = LocalDate.now();
       System.out.println("Current date: " + date1);
-		
+
       //add 1 month to the current date
       LocalDate date2 = date1.plus(1, ChronoUnit.MONTHS);
       System.out.println("Next month: " + date2);
-      
+
       Period period = Period.between(date2, date1);
       System.out.println("Period: " + period);
    }
-	
+
    public void testDuration() {
       LocalTime time1 = LocalTime.now();
       Duration twoHours = Duration.ofHours(2);
-		
+
       LocalTime time2 = time1.plus(twoHours);
       Duration duration = Duration.between(time1, time2);
-		
+
       System.out.println("Duration: " + duration);
    }
 }
 ```
 
 ---
-
-
