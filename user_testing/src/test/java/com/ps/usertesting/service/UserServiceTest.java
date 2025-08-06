@@ -11,20 +11,20 @@ class UserServiceTest {
 
     @Test
     void testGetUserNameById_returnsUserName_whenUserExists() {
-        // 1. Create mock for UserRepository
+        // 1. Create mock/fake for UserRepository
         UserRepository mockRepo = mock(UserRepository.class);
 
         // 2. Define mock behavior
         when(mockRepo.findById(1)).thenReturn(new User(1, "Alice"));
 
-        // 3. Inject mock into service
+        // 3. Inject mock into service //dependency injection
         UserService userService = new UserService(mockRepo);
 
         // 4. Call and verify
         String result = userService.getUserNameById(1);
         assertEquals("Alice", result);
 
-        // 5. Verify interaction with mock
+        // 5. Verify interaction with mock - verifying how many times did you call the method findById()
         verify(mockRepo).findById(1);
     }
 

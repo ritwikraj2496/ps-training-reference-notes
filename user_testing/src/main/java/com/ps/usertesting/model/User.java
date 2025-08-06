@@ -1,6 +1,7 @@
 package com.ps.usertesting.model;
 
 public class User {
+
     private int id;
     private String name;
 
@@ -13,4 +14,9 @@ public class User {
     // Getters
     public int getId() { return id; }
     public String getName() { return name; }
+
+    // Constructor
+    public User() {
+
+    }
 }

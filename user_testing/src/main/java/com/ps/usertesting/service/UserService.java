@@ -8,9 +8,13 @@ public class UserService {
     private UserRepository userRepository;
 
     // Constructor injection
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
     }
+
+    //OR
+
+    // UserRepository userRepository = new UserRepository(); //new keyword is not advised to be used
 
     // Business method to test
     public String getUserNameById(int id) {
