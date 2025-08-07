@@ -11,5 +11,5 @@ Welcome to your curated notes repository.
 - [Day 5 - JSON Processing in JAVA](./day5-json-processing-java.md)
 - [Day 6 - IDE & Debugging Techniques](./day6-ide-debugging.md)
 - [Day 7 - Collections and Map Framework](./day7-collections-map.md)
-- [Day 7 - Java 8, 11 & 21 features](./day7-java8_11_21_features.md)
+- [Day 7 - Utility Classes and Time API](./day7-utility-classes-timeapi.md)
 - [Day 7 - TDD, Testing using JUnit](./day7-testing-tdd.md)
