@@ -507,5 +507,52 @@ public class GoodDIPExample {
 - *Easy to extend: Add PayPalPayment tomorrow without changing PaymentProcessor.*
 - *Test-friendly: You can inject a mock payment method for unit testing.*
 
+---
 
+## Production Level / Standard Code Example:
 
+```java
+solid-principles-demo/
+│
+├── src/
+│   ├── models/
+│   │   ├── Order.java                // SRP example (Single Responsibility)
+│   │   ├── Product.java               // SRP helper class
+│   │   ├── Customer.java              // SRP helper class
+│   │
+│   ├── services/
+│   │   ├── OrderService.java          // SRP + OCP example
+│   │   ├── PaymentService.java        // DIP example (depends on interface)
+│   │   ├── NotificationService.java   // DIP + ISP example
+│   │
+│   ├── payment/
+│   │   ├── PaymentProcessor.java      // Interface for DIP
+│   │   ├── CreditCardPayment.java     // OCP example (new payment method)
+│   │   ├── PaypalPayment.java         // OCP example (another payment method)
+│   │
+│   ├── notification/
+│   │   ├── EmailNotifier.java         // ISP example (implements specific interface)
+│   │   ├── SmsNotifier.java           // ISP example (implements specific interface)
+│   │
+│   ├── interfaces/
+│   │   ├── Notifier.java              // ISP example
+│   │   ├── PaymentProcessor.java      // DIP abstraction
+│   │
+│   ├── utils/
+│   │   ├── OrderValidator.java        // SRP example (validation separated)
+│   │
+│   ├── MainApp.java                   // Entry point - ties everything together
+│
+├── README.md
+└── pom.xml                            // Maven config (or build.gradle if Gradle)
+```
+
+**How it maps to SOLID:**
+
+- S (Single Responsibility) → Order.java, OrderService.java, OrderValidator.java (Each class has one reason to change)
+- O (Open/Closed) → CreditCardPayment.java, PaypalPayment.java (Add payment types without modifying existing code)
+- L (Liskov Substitution) → Any PaymentProcessor implementation can replace another without breaking code
+- I (Interface Segregation) → Notifier.java allows separate interfaces for Email/SMS instead of one big notification interface
+- D (Dependency Inversion) → OrderService depends on PaymentProcessor abstraction, not concrete payment classes
+
+---
