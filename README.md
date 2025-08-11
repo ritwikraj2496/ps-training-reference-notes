@@ -13,3 +13,5 @@ Welcome to your curated notes repository.
 - [Day 7 - Collections and Map Framework](./day7-collections-map.md)
 - [Day 7 - Utility Classes and Time API](./day7-utility-classes-timeapi.md)
 - [Day 7 - TDD, Testing using JUnit](./day7-testing-tdd.md)
+- [Day 9 - SOLID Principles](./day9-solid-principles.md)
+- [Day 10 - Software Design Principles](./day10-software-design-principles.md)

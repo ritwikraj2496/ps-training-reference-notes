@@ -2,6 +2,7 @@ package org.sapient.ordermanagement.model;
 import java.util.List;
 
 public class Order {
+
     private List<Double> itemPrices;
     private boolean discountEligible;
 
