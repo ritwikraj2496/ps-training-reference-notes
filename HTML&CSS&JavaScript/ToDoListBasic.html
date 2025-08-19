@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic TO DO LIST</title>
+  </head>
+  <body>
+    <div>
+      <h1>Basic TO DO LIST</h1>
+      <br /><br />
+      <div>
+        <form>
+          <div>
+            <input
+              type="text"
+              placeholder="write all your tasks here"
+              id="box"
+            />
+            <br /><br />
+            <div>
+              <input
+                type="button"
+                value="Enter/Save"
+                id="save"
+                onclick="addItem()"
+              />
+              <!-- onclick is a html event, do not use it if you are going ahead with addEventListener function of JS-->
+            </div>
+          </div>
+        </form>
+      </div>
+      <div>
+        <ol id="list_item"></ol>
+      </div>
+    </div>
+
+    <script>
+      // let save = document.getElementById("save");
+      // save.addEventListener("click", function () {
+      function addItem() {
+        let item = document.getElementById("box");
+        console.log(item); //check what does it store
+        console.log(item.value);
+        let li_item = document.getElementById("list_item");
+
+        if (item.value != "") {
+          let make_li = document.createElement("li"); //<li></li> represents make_li variable
+          let text_node = document.createTextNode(item.value);
+          make_li.appendChild(text_node); //<li> Ritwik </li> represents make_li variable
+          li_item.appendChild(make_li); //<ul><li>Ritwik</li></ul>
+
+          item.value = ""; //to empty the input box
+
+          make_li.onclick = function () {
+            this.parentNode.removeChild(this); //to remove the specific(this) list when clicked on it - this refers to the clicked element
+          };
+        } else {
+          alert("please add the tasks to the item box"); //if box is empty then throw an alert
+        }
+      }
+    </script>
+  </body>
+</html>
