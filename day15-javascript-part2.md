@@ -186,7 +186,7 @@ console.log("Frame loaded:", frame);
 **What is DOM?**
 
 - The DOM is a tree-like structure created by the browser for every HTML page.
-- It represents all elements (<p>, <div>, <form>, etc.) as objects that can be accessed and modified using JavaScript.
+- It represents all elements (p tag, div tag, form tag, etc.) as objects that can be accessed and modified using JavaScript.
 
 Think of it like:
 
@@ -244,7 +244,7 @@ let para = document.querySelector("p");
 para.style.color = "blue";
 
 //Example 3: Select by id
-let secondMsg = document.querySelector("#para");
+let secondMsg = document.querySelector("#myPara");
 console.log(secondMsg);
 
 //Example 4: Select by tag - applying style to all paragraphs
@@ -275,6 +275,7 @@ div.innerText = "Replaced with plain text (no tags)";
 // Example 3:
 <div id="htmlDiv">Hello <b>World</b></div>
 <p id="btnMsg">Waiting for button click...</p>
+<button type="submit" onclick="clickButton()">Submit</button>
 
 let button = document.getElementById("btnMsg");
 function clickButton(){
@@ -310,19 +311,19 @@ htmlDiv.innerHTML = "New <i>Italic</i> Text";
 
 #### Hands-on Practice
 
-1. Create a <p> with id myPara.
+1. Create a p tag with id myPara.
 
 - Change its text using getElementById.
 - Change its color using querySelector.
 
-2. Create a <div> with HTML content.
+2. Create a div tag with HTML content.
 
 - Read the content using .innerText.
 - Replace it with new bold text using .innerHTML.
 
 3. Build a button:
 
-- On click, update a <p> to say "You clicked the button!".
+- On click, update a p tag to say "You clicked the button!".
 
 4. Create two paragraphs with class "msg".
 
@@ -368,7 +369,7 @@ console.log(img.getAttribute("alt")); // New Image
 
 **What is it?**
 
-Forms (<form>), inputs (<input>), and select dropdowns (<select>) can be read and controlled using JavaScript.
+Forms (form tag), inputs (input tag), and select dropdowns (select tag) can be read and controlled using JavaScript.
 
 **Why do we need it?**
 
@@ -382,9 +383,10 @@ Forms (<form>), inputs (<input>), and select dropdowns (<select>) can be read an
 - Access checkbox/radio: element.checked
 
 **Examples:**
+
 ```javascript
 <form id="myForm">
-  
+
   <input type="text" id="username" value="Guest"><br/>
 
   <input type="checkbox" name="" id="subscribe" checked>Subscribe<br/>
@@ -393,7 +395,7 @@ Forms (<form>), inputs (<input>), and select dropdowns (<select>) can be read an
       <input type="checkbox" name="gender" checked value="Male" />Male<br />
       <input type="checkbox" name="gender" value="Female" />Female<br />
       <input type="checkbox" name="gender" checked value="Others" />Others<br />
-  
+
   <select id="city">
     <option value="delhi">Delhi</option>
     <option value="mumbai" selected>Mumbai</option>
