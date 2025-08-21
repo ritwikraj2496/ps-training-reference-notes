@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="demo"></p>
+    <button onclick="window.print()">Print this page</button>
+    <script>
+      // ***Different ways to print or display in JavaScript***
+
+      // 1. document.write() — writes directly into the HTML document (not recommended for modern apps)
+      document.write("Hello World");
+
+      // 2. console.log() — prints to the developer console (great for debugging)
+      console.log("hello");
+
+      // 3. Updating HTML using DOM
+      document.getElementById("demo").innerHTML = "Congratulations!"; // sets content of element with id "demo"
+
+      // querySelector("#first")
+      // querySelectorAll(".first")
+
+      let para = document.getElementById("demo").innerText;
+      console.log(para); // logs the actual HTML element <p id="demo">Congratulations!</p>
+
+      console.log("@#####################");
+
+      // 4. alert() — shows a popup alert to the user
+      window.alert("hjbchjsdbfh"); // or simply alert(11)
+
+      // 5. print() — opens browser print dialog (used to print the current page)
+      window.print(); // or just print()
+
+      console.log("@#####################");
+
+      // 6. prompt() — takes user input (as string), and can be used with parseInt / parseFloat
+      let firstNumber = prompt("Enter the first number:");
+      console.log(firstNumber); // logs user input as string
+
+      let secondNumber = prompt("Enter the second number:");
+      console.log(secondNumber); // logs user input
+
+      let sum = parseInt(firstNumber) + parseInt(secondNumber); // convert string to number
+      console.log("Sum is:", sum); // print the result
+
+      console.log("@#####################");
+
+      // 7. confirm() — asks user for Yes/No (OK/Cancel), returns true/false
+      let answer = confirm("Do you want to continue?");
+      console.log("User selected:", answer); // true or false
+
+      console.log("@#####################");
+
+      // 8. console methods — useful during debugging
+
+      console.warn("This is a warning"); // Yellow warning in console
+      console.error("This is an error"); // Red error in console
+      console.info("Just some info"); // Info-style log (similar to log)
+
+      // 9. console.table() — prints tabular data in a readable table format
+      let person = {
+        name: "Ritwik",
+        age: 27,
+        role: "Trainer",
+      };
+      console.table(person);
+
+      let people = [
+        { name: "Riya", age: 25 },
+        { name: "Mohan", age: 30 },
+      ];
+      console.table(people);
+
+      console.log("@#####################");
+
+      // 10. console.group() and groupEnd() — used to group related logs
+      console.group("User Details");
+      console.log("Name: Riya");
+      console.log("Age: 25");
+      console.groupEnd();
+
+      console.log("@#####################");
+
+      // 11. Logging with styles (CSS in console)
+      console.log(
+        "%cThis is styled text",
+        "color: green; font-size: 16px; font-weight: bold;"
+      );
+    </script>
+  </body>
+</html>

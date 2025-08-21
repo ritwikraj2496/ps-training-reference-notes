@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Registration System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      form {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+      .highlight {
+        border: 2px solid blue;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+      }
+      .passed {
+        background-color: #c8f7c5;
+      }
+      .failed {
+        background-color: #f7c5c5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Student Registration System</h1>
+
+    <!-- Form -->
+    <form id="studentForm">
+      <label>Name: </label>
+      <input
+        type="text"
+        id="name"
+        onfocus="highlightField(this)"
+        onblur="removeHighlight(this)"
+      />
+      <span id="nameError" class="error"></span><br /><br />
+
+      <label>Age: </label>
+      <input type="number" id="age" /><br /><br />
+
+      <label>Gender: </label>
+      <input type="radio" name="gender" value="Male" /> Male
+      <input type="radio" name="gender" value="Female" /> Female <br /><br />
+
+      <label>Course: </label>
+      <select id="course" onchange="courseChanged()">
+        <option value="">Select</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="Java">Java</option>
+        <option value="Python">Python</option></select
+      ><br /><br />
+
+      <label>Subjects: </label>
+      <input type="checkbox" id="math" value="Math" /> Math
+      <input type="checkbox" id="science" value="Science" /> Science
+      <input type="checkbox" id="english" value="English" /> English
+      <br /><br />
+
+      <label>Marks: </label>
+      <input type="number" id="marks" /><br /><br />
+
+      <button type="submit">Register</button>
+    </form>
+
+    <!-- Table -->
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Course</th>
+          <th>Subjects</th>
+          <th>Marks</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      // ========== BOM examples ==========
+      console.log("Window width: " + window.innerWidth);
+      console.log("Browser: " + navigator.userAgent);
+      console.log("Page URL: " + location.href);
+      console.log("History Length: " + history.length);
+
+      const form = document.getElementById("studentForm");
+      const tableBody = document.querySelector("#studentTable tbody");
+
+      // highlight field on focus/blur
+      function highlightField(field) {
+        field.classList.add("highlight");
+      }
+      function removeHighlight(field) {
+        field.classList.remove("highlight");
+      }
+
+      // onchange for select
+      function courseChanged() {
+        const course = document.getElementById("course").value;
+        alert("Course selected: " + course);
+      }
+
+      // Event Listener for submit
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // get values
+        const name = document.getElementById("name").value.trim();
+        const age = document.getElementById("age").value;
+        const gender = document.querySelector("input[name='gender']:checked");
+        const course = document.getElementById("course").value;
+        const marks = document.getElementById("marks").value;
+
+        // validation
+        if (name === "") {
+          document.getElementById("nameError").innerText = "Name is required!";
+          return;
+        } else {
+          document.getElementById("nameError").innerText = "";
+        }
+
+        if (!gender) {
+          alert("Please select gender");
+          return;
+        }
+        if (course === "") {
+          alert("Please select a course");
+          return;
+        }
+
+        // get subjects
+        const subjects = [];
+        document
+          .querySelectorAll("input[type='checkbox']:checked")
+          .forEach((cb) => {
+            subjects.push(cb.value);
+          });
+
+        // create student object (with nested array for subjects)
+        const student = {
+          name: name,
+          age: age,
+          gender: gender.value,
+          course: course,
+          subjects: subjects,
+          marks: marks,
+          result: marks >= 40 ? "Pass" : "Fail",
+        };
+
+        // create row dynamically
+        const tr = document.createElement("tr");
+        tr.className = student.result === "Pass" ? "passed" : "failed";
+
+        tr.innerHTML = `
+        <td>${student.name}</td>
+        <td>${student.age}</td>
+        <td>${student.gender}</td>
+        <td>${student.course}</td>
+        <td>${student.subjects.join(", ")}</td>
+        <td>${student.marks}</td>
+        <td>${student.result}</td>
+        <td><button class="deleteBtn">Delete</button></td>
+      `;
+
+        // append row
+        tableBody.appendChild(tr);
+
+        // attach delete event listener
+        tr.querySelector(".deleteBtn").addEventListener("click", function () {
+          tr.remove();
+        });
+
+        // reset form
+        form.reset();
+      });
+
+      // Event Flow demo
+      document.body.addEventListener("click", function () {
+        console.log("Body clicked (Bubbling)");
+      });
+
+      document.body.addEventListener(
+        "click",
+        function () {
+          console.log("Body clicked (Capturing)");
+        },
+        true
+      );
+    </script>
+  </body>
+</html>

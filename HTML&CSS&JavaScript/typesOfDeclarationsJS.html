@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ***Understanding var, let and const***
+
+      // 1. var variables can be updated and re-declared, let variables can be updated but not re-declared and const variables can neither be updated nor re-declared.
+
+      var a; //declaration
+      var a = 20; //re-declaration
+      a = 10; //update
+      console.log(a); //1. var variables can be updated and re-declared within its scope
+
+      let b;
+      b = 10; //declaration and initialization
+      //let b = 20; //compile error: let variables cannot be re-declared
+      b = 20; //1. let variables can be updated but not re-declared
+
+      //1. const variables can neither be updated nor re-declared
+      const a = 10; //final value - constant value
+      //a = 20; //compile error: const variables cannot be updated
+      //const a = 30; //compile error: const variables cannot be re-declared
+
+      // @#################################################################################################@
+
+      //2. let and const are block scoped i.e will be accessible only inside the block wherever they are declared. var is function scoped, meaning it is accessible throughout the function in which it is declared.
+
+      // Example to understand `var` with if:
+      var c = "Ritwik"; // global (function) scope
+      var d = 20;
+
+      if (d > 9) {
+        var c = "Hi Raj!"; // still in global scope (NOT block scoped)
+        console.log(c); // Output: Hi Raj!
+      }
+
+      console.log(c); // Output: Hi Raj! — because `var` is function-scoped, not block-scoped
+
+      // Explanation -
+      // 2. var is function-scoped, not block-scoped.
+      // So the var c = "Hi Raj!" inside the if block overwrites the c declared outside — they are actually the same variable.
+      // If you had used let or const, the inner c would be block-scoped and would not affect the outer c.
+
+      // Example to understand `let` with if:
+      let name = "Ritwik";
+      let marks = 20;
+
+      if (marks > 9) {
+        let name = "Hi Raj!"; // block scoped
+        console.log(name); // Output: Hi Raj!
+      }
+
+      console.log(name); // Output: Ritwik — outer `c` remains unaffected
+
+      // Explanation -
+      // 2. let is block-scoped, so the name inside the if block is a different variable from the name outside.
+      // The inner name does not affect the outer name, which remains "Ritwik".
+
+      // Example to understand `var` with function:
+      var e = "Ritwik"; // global scope
+      var f = 20; // global scope
+
+      function test() {
+        var e = "Hi Raj!"; // function-local scope (this `e` is scoped to `test()` only) - (shadows the global `e`)
+        console.log(e); // Output: Hi Raj! — logs the function-local `e`
+      }
+
+      test();
+      console.log(e); // Output: Ritwik — outer `e` is unaffected by inner `e` - global `e` remains unchanged
+
+      // Example to understand `let` with function:
+      let name1 = "Ritwik"; // global scope
+      let marks1 = 20; // global scope
+
+      function test1() {
+        let name1 = "Hi Raj!"; // block/function scope — separate from global `e`
+        console.log(name1); // Output: Hi Raj!
+      }
+
+      test1();
+      console.log(name1); // Output: Ritwik — global `e` remains unchanged
+
+      // Example to understand let:
+      let g = "Ritwik"; // global scope
+      let h = 20; // global scope
+
+      if (h > 9) {
+        g = 40; // reassigns the global `g` (not block scoped, no new `let`) - That’s because you're reassigning the global g (not shadowing it with a new let g inside the block), so the original "Ritwik" is overwritten.
+        // let i = "Hi Raj!"; // block-scoped variable
+
+        console.log(g); // Output: 40 — value of `g` is changed globally
+        // console.log(i); // Output: Hi Raj! — would work if uncommented, scoped to this block
+      }
+
+      console.log(g); // Output: 40 — global `g` was reassigned in the if block
+      console.log(h); // Output: 20 — global `h`
+      console.log(i); // ReferenceError: i is not defined — block-scoped, not accessible here
+
+      // @#################################################################################################@
+
+      // 3. var variables are hoisted to the top of their scope, meaning they can be used before they are declared. let and const variables are also hoisted but cannot be accessed before their declaration (this is known as the "temporal dead zone").
+
+      console.log(x); // Output: undefined — `x` is hoisted, but not initialized
+      var x = 5; // declaration and initialization
+      console.log(x); // Output: 5 — now `x` is defined
+
+      // console.log(y); // ReferenceError: Cannot access 'y' before initialization — `y` is in the temporal dead zone
+      let y = 10; // declaration and initialization
+      console.log(y); // Output: 10 — now `y` is defined
+
+      // console.log(z); // ReferenceError: Cannot access 'z' before initialization — `z` is in the temporal dead zone
+      const z = 15; // declaration and initialization
+      console.log(z); // Output: 15 — now `z` is defined
+
+      // @#################################################################################################@
+
+      // 4. var and let with setTimeout:
+      for (var j = 0; j < 3; j++) {
+        setTimeout(() => {
+          console.log(j); // Output: 3, 3, 3 — `j` is function-scoped, so it retains the last value after the loop ends
+          // All callbacks share the same `j` due to var being function-scoped
+        }, 1000);
+      }
+      // Explanation -
+      // var is function-scoped, so by the time the setTimeout executes, the loop has completed, and `j` is 3.
+      // The loop runs and completes *before* the `setTimeout` callbacks execute.
+      // By the time the callbacks run after 1000ms, `j` has already become 3.
+      // All three timeouts log the final value of `j`.
+
+      for (let k = 0; k < 3; k++) {
+        setTimeout(() => {
+          console.log(k); // Output: 0, 1, 2 — `k` is block-scoped, so each timeout captures its own value of `k`
+          // Each iteration gets a new block-scoped `k` captured in closure
+        }, 1000);
+      }
+      // Explanation -
+      // let is block-scoped, so each iteration of the loop has its own `k` variable.
+      // The `setTimeout` closure "remembers" the `k` value it was created with.
+      // Each timeout logs the value of `k` at the time it was created, resulting in 0, 1, and 2 being logged.
+
+      // Note :- Why with setTimeout() ?
+      // setTimeout() schedules the callback to run after the loop finishes (i.e., 1000ms later).
+      // By the time those callbacks actually run, the loop has already completed — and j has reached 3.
+      // All three callbacks share the same j (due to var being function-scoped), so they all print the final value: 3.
+
+      // @#################################################################################################@
+    </script>
+  </body>
+</html>

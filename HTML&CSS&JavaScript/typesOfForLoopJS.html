@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // ***Understanding different types of for loop in JavaScript***
+
+      let person = [
+        "Ritwik",
+        "Arvind",
+        "Mohan",
+        "Abhinav",
+        "Riya",
+        "Harikrishna",
+      ];
+
+      // object creation
+      let person1 = {
+        name: "Ritwik",
+        age: 27,
+        role: "Trainer",
+      };
+
+      console.log("@#####################");
+
+      // 1. Normal for loop — Index-based, works well with arrays when you need the index
+      for (let i = 0; i < person.length; i++) {
+        console.log(`Index ${i}: ${person[i]}`);
+      }
+
+      console.log("@#####################");
+
+      // 2. for...in — Best used with objects (iterates over keys) - stores keys
+      for (let key in person1) {
+        console.log(`Key: ${key}, Value: ${person1[key]}`);
+      }
+
+      // CAUTION: for...in on arrays gives index numbers (not values) - should be avoided for arrays
+      for (let index in person) {
+        console.log(`Index in array: ${index}`); // "0", "1", ...
+      }
+
+      console.log("@#####################");
+
+      // 3. for...of — Best for arrays, strings, Sets, Maps (iterates over values) - stores values directly
+      for (let name of person) {
+        console.log(`Name: ${name}`);
+      }
+
+      console.log("@#####################");
+
+      // 4. for...of with entries() — To access both index and value in an array
+      for (let [index, name] of person.entries()) {
+        console.log(`Person ${index + 1}: ${name}`);
+      }
+
+      console.log("@#####################");
+
+      const nums = [10, 20, 30, 40, 50];
+
+      // Example of for...of with entries() to get index and value - numbers array
+      for (const [index, num] of nums.entries()) {
+        console.log(`Index: ${index}, Value: ${num}`);
+      }
+
+      console.log("@#####################");
+
+      // 5. Looping over string (for...of on strings)
+      let str = "MERN";
+      for (let char of str) {
+        console.log(`Char: ${char}`);
+      }
+
+      console.log("@#####################");
+
+      // 6. Using break and continue inside a for loop
+      for (let i = 0; i < person.length; i++) {
+        if (person[i] === "Mohan") continue; // skips 'Mohan'
+        if (person[i] === "Riya") break; // stops at 'Riya'
+        console.log(`Name: ${person[i]}`);
+      }
+
+      console.log("@#####################");
+
+      // 7. Reverse loop — Looping backward
+      for (let i = person.length - 1; i >= 0; i--) {
+        console.log(`Reverse ${i}: ${person[i]}`);
+      }
+
+      console.log("@#####################");
+
+      // 8. Loop over a Set (for...of works)
+      let set = new Set(["React", "Node", "MongoDB", "React"]);
+      for (let tech of set) {
+        console.log(`Tech: ${tech}`); // No duplicates
+      }
+
+      console.log("@#####################");
+
+      // 9. Loop over Map using for...of
+      let map = new Map([
+        ["name", "Ritwik"],
+        ["age", 27],
+        ["stack", "MERN"],
+      ]);
+
+      for (let [key, value] of map) {
+        console.log(`Key: ${key}, Value: ${value}`);
+      }
+
+      console.log("@#####################");
+
+      // 10. Nested loops with arrays
+      let nested = [
+        ["Ritwik", "Trainer"],
+        ["Arvind", "Manager"],
+        ["Mohan", "Developer"],
+      ];
+
+      for (let [name, role] of nested) {
+        console.log(`${name} is a ${role}`);
+      }
+
+      // 11. While loop — Useful when condition needs to be checked before every iteration
+      let i = 0;
+      while (i < person.length) {
+        console.log(`While: ${person[i]}`);
+        i++;
+      }
+
+      console.log("@#####################");
+
+      // 12. Do...while loop — Runs at least once even if condition is false
+      let j = 0;
+      do {
+        console.log(`DoWhile: ${person[j]}`);
+        j++;
+      } while (j < person.length);
+
+      console.log("@#####################");
+    </script>
+  </body>
+</html>
