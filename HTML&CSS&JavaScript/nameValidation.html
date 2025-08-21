@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Name Validation</title>
+    <style>
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Enter Your Name:-</h2>
+    <form>
+      <label for="nameInput">Name: </label>
+      <input type="text" name="name" id="nameInput" />
+
+      <span id="errorMsg" class="error"></span>
+      <br /><br />
+
+      <button type="button" onclick="validateName()">Submit</button>
+    </form>
+
+    <script>
+      function validateName() {
+        let nameInput = document.getElementById("nameInput").value;
+
+        let alphabetRegex = /^[A-Za-z]+$/;
+
+        let errorMsg = document.getElementById("errorMsg");
+
+        if (nameInput.match(alphabetRegex)) {
+          //match always returns boolean - value.match(regex)
+          errorMsg.textContent = "";
+          alert("Name is valid!");
+        } else {
+          errorMsg.textContent = "Please enter only alphabets!";
+        }
+      }
+    </script>
+  </body>
+</html>

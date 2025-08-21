@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let string = "Raman"; //array of characters ['R','a','m','a','n']
+
+      console.log(string.length); //5
+      console.log(string.toUpperCase()); //RAMAN
+      console.log(string.toLowerCase()); //raman
+      console.log(string.charAt(3)); //a - character at index 3
+      console.log(string.trim()); //Raman - remove the white space from beginning and end
+
+      //slice() syntax - slice(optional start parameter, optional end parameter)
+      //The slice() method can be used to create a copy of an array or return a portion of an array.
+      //It is important to note that the slice() method does not alter the original array but instead creates a shallow copy.
+      console.log(string.slice()); //Raman - all of the elements from my string array copied into the new array.
+      console.log(string.slice(2)); //man - original string was not modified
+      console.log(string.slice()); //Raman
+      console.log(string.slice(-2)); //an
+      console.log(string.slice(2, 4)); //ma
+      console.log(string.slice(-2, 0)); //nothing will be printed
+
+      let string1 = "Ritwik, Raman, Rohan, Soham";
+      let a = string1.split(", "); //a will become an array
+      //by default ", " will be there in split and join functions
+      console.log(a); //['Ritwik', 'Raman', 'Rohan', 'Soham']
+      a.push("Angel");
+      let r = a.join(","); //this is same as the next line
+      let res1 = a.join(); //this will convert the array to string with default separator ","
+      let res = a.toString(); //parsing array to string
+      console.log(r); //Ritwik,Raman,Rohan,Soham,Angel
+      console.log(res1); //Ritwik,Raman,Rohan,Soham,Angel
+      console.log(res); //Ritwik,Raman,Rohan,Soham,Angel
+
+      //substring and substr
+      //substring(indexStart, optional indexEnd)
+      //return value - A new string containing the specified part of the given string.
+
+      //substr(indexStart, optional length) - deprecated
+      //return value - A new string containing the specified part of the given string.
+
+      let lorem =
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod impedit unde incidunt dolor architecto, dolores vitae eos corrupti similique? Assumenda aspernatur veniam velit voluptas eum ad rerum, consectetur id illum?";
+      console.log(lorem.replace("dolor", "Dollar"));
+      console.log(lorem.replaceAll("dolor", "Dollar"));
+      console.log(lorem.replace(/dolor/g, "Dollar"));
+
+      let array = "12345";
+
+      document.write(str_array.padStart(10, "abc"));
+      document.write("<br>");
+
+      document.write(str_array.padEnd(20, "abc"));
+      document.write("<br>");
+      document.write("<br>");
+
+      let string2 = "Hello, World!";
+      console.log(string2.search("p")); // -1
+      console.log(string2.search("W")); // 7
+
+      // *** JavaScript String Methods - Notes *** //
+
+      let str = "  Hello JavaScript World! JavaScript is powerful.  ";
+
+      console.log("@#####################");
+
+      // 1. length — returns the number of characters
+      console.log(str.length); // Output: 49
+
+      console.log("@#####################");
+
+      // 2. toUpperCase() — converts entire string to uppercase
+      console.log(str.toUpperCase()); // Output: "  HELLO JAVASCRIPT WORLD! JAVASCRIPT IS POWERFUL.  "
+
+      // 3. toLowerCase() — converts entire string to lowercase
+      console.log(str.toLowerCase()); // Output: "  hello javascript world! javascript is powerful.  "
+
+      console.log("@#####################");
+
+      // 4. includes() — checks if substring exists (case-sensitive)
+      console.log(str.includes("JavaScript")); // Output: true
+      console.log(str.includes("python")); // Output: false
+
+      console.log("@#####################");
+
+      // 5. indexOf() — returns first index of substring or -1
+      console.log(str.indexOf("JavaScript")); // Output: 8
+
+      // 6. lastIndexOf() — returns last occurrence index
+      console.log(str.lastIndexOf("JavaScript")); // Output: 26
+
+      console.log("@#####################");
+
+      // 7. slice(start, end) — extracts part of string
+      console.log(str.slice(2, 7)); // Output: "Hello"
+
+      console.log("@#####################");
+
+      // 8. trim() — removes whitespace from both ends
+      console.log(str.trim()); // Removes leading and trailing spaces
+
+      // 9. trimStart() — removes whitespace from start
+      console.log(str.trimStart()); // Removes leading spaces
+
+      // 10. trimEnd() — removes whitespace from end
+      console.log(str.trimEnd()); // Removes trailing spaces
+
+      console.log("@#####################");
+
+      // 11. replace() — replaces first match only
+      console.log(str.replace("JavaScript", "JS")); // Only first occurrence replaced
+
+      // 12. replaceAll() — replaces all matches
+      console.log(str.replaceAll("JavaScript", "JS")); // All occurrences replaced
+
+      console.log("@#####################");
+
+      // 13. split() — splits string into array using separator
+      let words = str.trim().split(" "); // split by space
+      console.log(words); // Output: array of words
+
+      console.log("@#####################");
+
+      // 14. startsWith() — checks if string starts with a value
+      console.log(str.trim().startsWith("Hello")); // true
+
+      // 15. endsWith() — checks if string ends with a value
+      console.log(str.trim().endsWith("powerful.")); // true
+
+      console.log("@#####################");
+
+      // 16. charAt(index) — returns char at position
+      console.log(str.charAt(5)); // Output: ' '
+
+      console.log("@#####################");
+
+      // 17. charCodeAt(index) — returns UTF-16 code of character
+      console.log(str.charCodeAt(2)); // Output: 72 (H)
+
+      console.log("@#####################");
+
+      // 18. at(index) — modern way to get char (supports negative index)
+      console.log(str.at(2)); // Output: 'H'
+      console.log(str.at(-1)); // Output: ' ' (last char)
+
+      console.log("@#####################");
+
+      // 19. concat() — joins two or more strings
+      let greet = "Hello";
+      let name = "Ritwik";
+      console.log(greet.concat(" ", name)); // Output: "Hello Ritwik"
+
+      console.log("@#####################");
+
+      // 20. substring(start, end) — similar to slice but can't use negative indexes
+      console.log(str.substring(2, 7)); // Output: "Hello"
+
+      console.log("@#####################");
+
+      // 21. substr(start, length) — returns `length` characters starting from index
+      console.log(str.substr(2, 5)); // Output: "Hello" (deprecated but still works)
+
+      console.log("@#####################");
+
+      // 22. repeat(n) — repeats string n times
+      console.log("JS ".repeat(3)); // Output: "JS JS JS "
+
+      console.log("@#####################");
+
+      // 23. padStart(targetLength, padString) — pads start of string
+      let num = "5";
+      console.log(num.padStart(3, "0")); // Output: "005"
+
+      // 24. padEnd(targetLength, padString) — pads end of string
+      console.log(num.padEnd(4, "*")); // Output: "5***"
+
+      console.log("@#####################");
+
+      // 25. valueOf() — returns primitive value (automatic most times)
+      console.log(str.valueOf()); // returns original string
+
+      console.log("@#####################");
+
+      // 26. search(regex) — finds match index using RegExp
+      console.log(str.search(/JavaScript/i)); // Output: 8 (first match)
+
+      console.log("@#####################");
+
+      // 27. match(regex) — returns array of matches or null
+      let matchResult = str.match(/JavaScript/g);
+      console.log(matchResult); // ["JavaScript", "JavaScript"]
+
+      // 28. matchAll(regex) — returns iterator of all matches (use spread to view)
+      let matches = [...str.matchAll(/JavaScript/g)];
+      console.log(matches);
+      /*
+      [
+        [ 'JavaScript', index: 8, ... ],
+        [ 'JavaScript', index: 26, ... ]
+      ]
+      */
+
+      console.log("@#####################");
+    </script>
+  </body>
+</html>

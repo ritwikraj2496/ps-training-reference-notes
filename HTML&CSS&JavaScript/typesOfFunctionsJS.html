@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array of Strings</title>
+  </head>
+  <body>
+    <script>
+      // =======================================================
+      // 1. Normal Function Declaration (hoisted)
+      function greet() {
+        console.log("Hello from a normal function!");
+      }
+      greet(); // Works
+
+      // =======================================================
+      // 2. Function Expression (not hoisted)
+      const sayHello = function () {
+        console.log("Hello from a function expression!");
+      };
+      sayHello(); // Works
+
+      // =======================================================
+      // 3. Anonymous Function (function without name, often used as callback or IIFE)
+      setTimeout(function () {
+        console.log("Anonymous function used in setTimeout!");
+      }, 1000);
+
+      //syntax of setTimeout and forEach:
+      // setTimeout(callback, delay);
+      // forEach(callback, array);
+
+      // =======================================================
+      // 4. Arrow Function (ES6+ syntax, does NOT bind its own `this`)
+      const arrowGreet = () => {
+        console.log("Hello from an arrow function!");
+      };
+      arrowGreet(); // Works
+
+      // =======================================================
+      // 5. Immediately Invoked Function Expression (IIFE)
+      (function () {
+        console.log("Hello from an IIFE!");
+      })(); // Called immediately
+
+      // =======================================================
+      // 6. Named Function Expression (useful for recursion within expressions)
+      const factorial = function fact(n) {
+        if (n <= 1) return 1;
+        return n * fact(n - 1);
+      };
+      console.log("Factorial of 5 is:", factorial(5));
+
+      // =======================================================
+      // 7. Arrow Function vs Normal Function - `this` example
+
+      const person1 = {
+        name: "Ritwik",
+        age: 27,
+        hello: function () {
+          console.log(`Hello, I'm ${this.name} and I'm ${this.age} years old.`);
+        },
+      };
+
+      person1.hello(); // Works as expected
+      console.log(person1.name); // "Ritwik"
+
+      // Arrow function does not bind its own `this` but it can bind other object this
+      const person = {
+        name: ["Ritwik", "Raj"],
+        // Regular function has its own `this`
+        greeting: function () {
+          alert(`Hi! I'm ${this.name[0]}`); // Works as expected
+        },
+        // Arrow function doesn't bind its own `this`
+        wrongGreeting: () => {
+          // ❌ 'this' here refers to the outer scope (e.g., window/global)
+          alert(`Hi! I'm ${this.name?.[0]}`); // likely undefined
+        },
+      };
+
+      person.greeting();
+      // person.wrongGreeting(); // ❌ Likely shows "undefined"
+
+      // ✅ Fix for arrow function: refer directly to object
+      const fixedGreeting = () => {
+        alert(`Hi! I'm ${person.name[0]}`); // Works
+      };
+
+      // =======================================================
+      // 8. Closure Example
+      function outerFunction() {
+        let counter = 0;
+
+        function innerFunction() {
+          counter++;
+          console.log("Counter:", counter); // Remembers counter even after outerFunction ends
+        }
+
+        return innerFunction;
+      }
+
+      const closureExample = outerFunction();
+      closureExample(); // Counter: 1
+      closureExample(); // Counter: 2
+
+      // =======================================================
+      // 9. Callback Example
+      function fetchData(callback) {
+        console.log("Fetching data...");
+        setTimeout(() => {
+          console.log("Data fetched!");
+          callback("This is the fetched data");
+        }, 2000);
+      }
+
+      function processData(data) {
+        console.log("Processing:", data);
+      }
+
+      fetchData(processData); // Passing processData as a callback
+
+      // =======================================================
+      // 10. Recursion Example
+      function countDown(n) {
+        if (n <= 0) {
+          console.log("Lift off!");
+          return;
+        }
+        console.log(n);
+        countDown(n - 1); // Calls itself
+      }
+      countDown(5);
+
+      // =======================================================
+      // Why so many function types?
+      // -------------------------------------------------------
+      // Normal function - best for hoisting, `this` binding.
+      // Function expression - more control over execution order.
+      // Arrow function - concise, especially for callbacks. Lexical `this`.
+      // IIFE - useful for immediate execution, scoping.
+      // Anonymous - useful for one-time logic.
+      // Closures - enable private variables and stateful functions.
+      // Callbacks - used for async flows or modular design.
+      // Recursion - suitable for problems that repeat in structure (e.g., trees, factorials).
+
+      // JavaScript offers variety because:
+      // - Functions are **first-class citizens** (can be passed around)
+      // - Different problems need different tools (size, scope, async, context)
+      // - ES6+ brought concise syntax and predictable `this` with arrow functions
+    </script>
+  </body>
+</html>
