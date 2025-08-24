@@ -203,10 +203,6 @@ db.createCollection("students");
 
 // Check collections - won't show until there is atleast one document inserted
 show collections;
-
-// Delete/Drop a database
-db.dropDatabase()
-// or db.collection_name.drop()
 ```
 
 ## CRUD Operations
@@ -214,12 +210,14 @@ db.dropDatabase()
 ```javascript
 // Create/Insert
 
-// In MongoDB you need not to create collection before you insert document in it. With a single command you can insert a document in the collection and the MongoDB creates that collection on the fly.
+// In MongoDB you need not to create collection before you insert document in it. 
+// With a single command you can insert a document in the collection and the MongoDB creates that collection on the fly.
 
-// Syntax: db.collection_name.insert({key:value, key:value…})
-
+// Syntax: 
+// db.collection.insertOne({key:value, key:value})
 db.students.insertOne({name:"Ritwik", company:"Sapient", age:29, course: "Java"});
 
+// db.collection.insertMany({key:value,key:value})
 db.students.insertMany([
   { name: "Bob", company:"Sapient", age: 25, course: "Python" },
   { name: "Charlie", company:"Sapient", age: 23, course: "MongoDB" }
@@ -228,16 +226,347 @@ db.students.insertMany([
 // We can also create collection before we actually insert data in it. This method provides you the options that you can set while creating a collection.
 
 // Syntax: db.createCollection(name, options)
-
 // name is the collection name
 // options is an optional field that we can use to specify certain parameters such as size, max number of documents etc. in the collection.
 
 db.createCollection("employees");
 
-// MongoDB stores data records as BSON documents. BSON is a binary representation of JSON documents.
+// Note: MongoDB stores data records as BSON documents. BSON is a binary representation of JSON documents.
+
+// Read (Find)
+// Syntax: db.collection.find(query,projection)
+db.students.find();                  // All
+db.students.find({ name: "Alice" }); // Filter
+
+// findOne()
+// to select only one document, we can use the findOne() method.
+db.students.findOne()
+
+// Update
+// Syntax: 
+// db.collection_name.updateOne(<filter>,<update>)
+db.students.updateOne(
+  { name: "Alice" },
+  { $set: { age: 23 } }
+);
+
+// Insert if not found
+// If you would like to insert the document if it is not found, you can use the upsert option.
+
+db.students.updateOne( 
+  { title: "Post Title 5" }, 
+  {
+    $set: 
+      {
+        title: "Post Title 5",
+        body: "Body of post.",
+        category: "Event",
+        likes: 5,
+        tags: ["news", "events"],
+        date: Date()
+      }
+  }, 
+  { upsert: true }
+)
+
+// db.collection_name.updateMany(<filter>,<update>)
+db.posts.updateMany({}, { $inc: { likes: 1 } })
+
+
+// Delete - delete documents by using the methods deleteOne() or deleteMany()
+// Syntax: 
+db.students.deleteOne({ name: "Charlie" });
+db.posts.deleteMany({ category: "Technology" })
+
+// Delete/Drop a database
+db.dropDatabase()
+db.collection_name.drop()
 ```
 
-## Query Modifiers: limit, skip, sort
+## Query Operators
+
+**Comparison Operators**
+
+The following operators can be used in queries to compare values:
+
+```javascript
+$eq: Values are equal
+$ne: Values are not equal
+$gt: Value is greater than another value
+$gte: Value is greater than or equal to another value
+$lt: Value is less than another value
+$lte: Value is less than or equal to another value
+$in: Value is matched within an array
+```
+
+**Logical Operators**
+
+The following operators can logically compare multiple queries.
+
+```javascript
+$and: Returns documents where both queries match
+$or: Returns documents where either query matches
+$nor: Returns documents where both queries fail to match
+$not: Returns documents where the query does not match
+```
+
+**Evaluation Operators**
+
+The following operators assist in evaluating documents.
+
+```javascript
+$regex: Allows the use of regular expressions when evaluating field values
+$text: Performs a text search
+$where: Uses a JavaScript expression to match documents
+```
+
+## MongoDB Update Operators
+
+**Fields**
+
+The following operators can be used to update fields:
+
+```javascript
+$currentDate: Sets the field value to the current date
+$inc: Increments the field value
+$rename: Renames the field
+$set: Sets the value of a field
+$unset: Removes the field from the document
+```
+
+**Array**
+
+The following operators assist with updating arrays.
+
+```javascript
+$addToSet: Adds distinct elements to an array
+$pop: Removes the first or last element of an array
+$pull: Removes all elements from an array that match the query
+$push: Adds an element to an array
+```
+
+## Aggregation Pipelines
+
+- Aggregation operations allow you to group, sort, perform calculations, analyze data, and much more.
+
+- Aggregation pipelines can have one or more "stages". The order of these stages are important. Each stage acts upon the results of the previous stage.
+
+### $group
+
+This aggregation stage groups documents by the unique _id expression provided.
+
+**Note:** Don't confuse this _id expression with the _id ObjectId provided to each document.
+
+```javascript
+db.listingsAndReviews.aggregate(
+    [ { $group : { _id : "$property_type" } } ]
+)
+```
+- This will return the distinct values from the property_type field.
+
+### $limit
+
+This aggregation stage limits the number of documents passed to the next stage.
+
+```javascript
+db.movies.aggregate([ { $limit: 1 } ])
+```
+
+- This will return the 1 movie from the collection.
+
+### $project
+
+This aggregation stage passes only the specified fields along to the next aggregation stage.
+
+```javascript
+db.restaurants.aggregate([
+  {
+    $project: {
+      "name": 1,
+      "cuisine": 1,
+      "address": 1
+    }
+  },
+  {
+    $limit: 5
+  }
+])
+```
+
+- This will return the documents but only include the specified fields.
+- Notice that the _id field is also included. This field is always included unless specifically excluded.
+- We use a 1 to include a field and 0 to exclude a field.
+
+### $sort
+
+This aggregation stage groups sorts all documents in the specified sort order.
+
+```javascript
+db.listingsAndReviews.aggregate([ 
+  { 
+    $sort: { "accommodates": -1 } 
+  },
+  {
+    $project: {
+      "name": 1,
+      "accommodates": 1
+    }
+  },
+  {
+    $limit: 5
+  }
+])
+```
+
+- This will return the documents sorted in descending order by the accommodates field.
+- The sort order can be chosen by using 1 or -1. 1 is ascending and -1 is descending.
+
+### $match
+
+This aggregation stage behaves like a find. It will filter documents that match the query provided.
+
+**Note:** Using $match early in the pipeline can improve performance since it limits the number of documents the next stages must process.
+
+```javascript
+db.listingsAndReviews.aggregate([ 
+  { $match : { property_type : "House" } },
+  { $limit: 2 },
+  { $project: {
+    "name": 1,
+    "bedrooms": 1,
+    "price": 1
+  }}
+])
+```
+
+- This will only return documents that have the property_type of "House".
+
+### $addFields
+
+This aggregation stage adds new fields to documents.
+
+```javascript
+db.restaurants.aggregate([
+  {
+    $addFields: {
+      avgGrade: { $avg: "$grades.score" }
+    }
+  },
+  {
+    $project: {
+      "name": 1,
+      "avgGrade": 1
+    }
+  },
+  {
+    $limit: 5
+  }
+])
+```
+
+- This will return the documents along with a new field, avgGrade, which will contain the average of each restaurants grades.score.
+
+### $count
+
+This aggregation stage counts the total amount of documents passed from the previous stage.
+
+```javascript
+db.restaurants.aggregate([
+  {
+    $match: { "cuisine": "Chinese" }
+  },
+  {
+    $count: "totalChinese"
+  }
+])
+```
+
+- This will return the number of documents at the $count stage as a field called "totalChinese".
+
+### Example:
+
+```javascript
+// Show first 2 students
+db.students.find().limit(2);
+
+// Skip first 1 result
+db.students.find().skip(1);
+
+// Sort by age ascending
+db.students.find().sort({ age: 1 });
+
+// Sort by age descending
+db.students.find().sort({ age: -1 });
+
+// Count students per course
+db.students.aggregate([
+  { $group: { _id: "$course", total: { $count: {} } } }
+]);
+
+// Show name and course only
+db.students.aggregate([
+  { $project: { name: 1, course: 1 } }
+]);
+```
+
 ## Indexing Overview: Single Field & Compound
-## Aggregation Basics ($match, $group, $project)
-## Java Integration (brief intro with MongoDB driver)
+
+**What?**
+
+- Index = Shortcut for searching, like an index in a book.
+
+**Why?**
+
+- Makes queries faster.
+
+**Types:**
+
+- Single field → One column/field.
+- Compound index → Multiple fields.
+
+```javascript
+// Single field
+db.students.createIndex({ age: 1 });
+
+// Compound
+db.students.createIndex({ course: 1, age: -1 });
+```
+
+## Java Integration with MongoDB
+
+**What?**
+
+- MongoDB provides a Java Driver to connect and perform CRUD.
+
+**Steps:**
+
+1. Add MongoDB Driver dependency (Maven/Gradle).
+2. Connect using MongoClient.
+3. Perform CRUD using MongoCollection.
+
+**Example (Java + MongoDB Driver):**
+
+```java
+import com.mongodb.client.*;
+import org.bson.Document;
+
+public class MongoDemo {
+    public static void main(String[] args) {
+        // Connect
+        MongoClient client = MongoClients.create("mongodb://localhost:27017");
+        MongoDatabase db = client.getDatabase("mydb");
+        MongoCollection<Document> students = db.getCollection("students");
+
+        // Insert
+        Document doc = new Document("name", "Alice")
+                            .append("age", 22)
+                            .append("course", "Java");
+        students.insertOne(doc);
+
+        // Find
+        for (Document d : students.find()) {
+            System.out.println(d.toJson());
+        }
+    }
+}
+```
