@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Data Table</title>
+  </head>
+  <body>
+    <form id="dataForm" novalidate>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+      <br />
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required />
+      <br />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+    <br />
+    <table border="2" id="dataTable">
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </table>
+    <script>
+      let data = document.getElementById("dataForm");
+
+      data.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get input values and trim to avoid spaces
+        const name = document.getElementById("name").value.trim();
+        const age = document.getElementById("age").value.trim();
+        const email = document.getElementById("email").value.trim();
+
+        // Basic validation: prevent empty values
+        if (!name || !age || !email) {
+          alert("Please fill in all fields before submitting.");
+          return; // Stop further execution
+        }
+
+        // Create a new table row
+        const newRow = document.createElement("tr");
+
+        // Dynamically create and append table cells
+        const values = [name, age, email];
+        values.forEach((value) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          newRow.appendChild(cell);
+        });
+
+        // Create Action cell with Delete button
+        const actionCell = document.createElement("td");
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.style.cursor = "pointer";
+
+        // Attach event to delete row
+        deleteBtn.addEventListener("click", function () {
+          newRow.remove();
+        });
+
+        actionCell.appendChild(deleteBtn);
+        newRow.appendChild(actionCell);
+
+        // Append the row to the table
+        const table = document.getElementById("dataTable");
+        table.appendChild(newRow);
+
+        // Reset the form after submission
+        data.reset();
+      });
+    </script>
+  </body>
+</html>

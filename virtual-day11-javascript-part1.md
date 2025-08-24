@@ -155,3 +155,42 @@ switch(day) {
 ## Document Object Model (DOM Basics)
 
 - [To Do List application using JS DOM concept](./HTML-CSS-JavaScript/toDoListBasic.html)
+
+- [Customer Form with Delete Button using JS DOM concept](./HTML-CSS-JavaScript/customerFormWithDelete.html)
+
+## Hoisting in JavaScript
+
+```javascript
+// console.log(a); //works and prints undefined, no error
+
+// var a = 10; //var supports hoisting
+```
+
+```javascript   
+// console.log(a); //throws error
+
+// let a = 10; //as let doesn't support hoisting
+```
+
+```javascript   
+// console.log(a); //throws error
+
+// const a = 10; //as const doesn't support hoisting
+```
+
+```javascript
+greet();
+
+function greet() {  //hoisting works for normal functions
+    console.log("Hello from a normal function!");
+}
+```
+
+```javascript
+//hoisting doesn't work for function expressions with let or const
+sayHello();
+
+let sayHello = function () {
+    console.log("Hello from a function expression!");
+};
+```

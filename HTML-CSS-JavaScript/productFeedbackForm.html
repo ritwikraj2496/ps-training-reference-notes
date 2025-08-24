@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Feedback Form</title>
+    <style>
+      /* Fixed header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(90deg, #4a90e2, #357ab8);
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.2rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding-top: 80px; /* prevent overlap with fixed header */
+        background: #f5f6fa;
+      }
+
+      form {
+        max-width: 600px;
+        margin: 2rem auto;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      form div {
+        margin-bottom: 1rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: #4a90e2;
+        outline: none;
+      }
+
+      input:invalid {
+        border-color: red;
+      }
+
+      button {
+        padding: 0.7rem 1.5rem;
+        background: #4a90e2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Progress bar */
+      #progress-container {
+        margin: 1rem 0;
+        background: #eee;
+        border-radius: 5px;
+        overflow: hidden;
+        height: 20px;
+      }
+      #progress {
+        background: #4caf50;
+        height: 100%;
+        width: 0%;
+        transition: width 0.3s;
+      }
+
+      /* Table for submitted data */
+      table {
+        margin: 2rem auto;
+        border-collapse: collapse;
+        width: 90%;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 0.8rem;
+        text-align: left;
+      }
+      th {
+        background: #4a90e2;
+        color: white;
+      }
+
+      /* Star Rating */
+      .stars {
+        display: flex;
+        gap: 5px;
+        cursor: pointer;
+        font-size: 1.5rem;
+      }
+      .star {
+        color: #ccc;
+        transition: color 0.2s;
+      }
+      .star.selected,
+      .star:hover,
+      .star:hover ~ .star {
+        color: gold;
+      }
+    </style>
+  </head>
+  <body>
+    <header>📝 Product Feedback Form</header>
+
+    <form id="feedbackForm">
+      <div>
+        <label for="name">Name (only letters & spaces):</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          pattern="[A-Za-z ]+"
+        />
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div>
+        <label for="purchaseDate">Purchase Date:</label>
+        <input type="date" id="purchaseDate" name="purchaseDate" />
+      </div>
+      <div>
+        <label for="category">Product Category:</label>
+        <input list="categories" id="category" name="category" />
+        <datalist id="categories">
+          <option value="Electronics"></option>
+          <option value="Clothing"></option>
+          <option value="Books"></option>
+        </datalist>
+      </div>
+      <div>
+        <label for="rating">Rating (1-5):</label>
+        <input
+          type="range"
+          id="rating"
+          name="rating"
+          min="1"
+          max="5"
+          required
+        />
+      </div>
+      <div>
+        <label>Star Rating:</label>
+        <div class="stars" id="starRating">
+          <span class="star" data-value="1">&#9733;</span>
+          <span class="star" data-value="2">&#9733;</span>
+          <span class="star" data-value="3">&#9733;</span>
+          <span class="star" data-value="4">&#9733;</span>
+          <span class="star" data-value="5">&#9733;</span>
+        </div>
+        <input type="hidden" id="starValue" name="starValue" value="0" />
+      </div>
+      <div>
+        <label for="color">Favorite Color:</label>
+        <input type="color" id="color" name="color" />
+      </div>
+      <div>
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments" rows="4"></textarea>
+      </div>
+
+      <div id="progress-container">
+        <div id="progress"></div>
+      </div>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <table id="resultTable" style="display: none">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Rating</th>
+          <th>Stars</th>
+          <th>Color</th>
+          <th>Comments</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      const form = document.getElementById("feedbackForm");
+      const progress = document.getElementById("progress");
+      const requiredFields = form.querySelectorAll("[required]");
+      const resultTable = document
+        .getElementById("resultTable")
+        .querySelector("tbody");
+
+      // Progress bar update
+      form.addEventListener("input", () => {
+        let filled = 0;
+        requiredFields.forEach((field) => {
+          if (field.value.trim() !== "") filled++;
+        });
+        const percent = (filled / requiredFields.length) * 100;
+        progress.style.width = percent + "%";
+      });
+
+      // Star rating
+      const stars = document.querySelectorAll(".star");
+      const starValueInput = document.getElementById("starValue");
+
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          const value = star.getAttribute("data-value");
+          starValueInput.value = value;
+          stars.forEach((s) => {
+            s.classList.toggle(
+              "selected",
+              s.getAttribute("data-value") <= value
+            );
+          });
+        });
+      });
+
+      // Submit form
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+          alert("Please fill required fields correctly.");
+          return;
+        }
+
+        // Collect values
+        const data = {
+          name: form.name.value,
+          email: form.email.value,
+          date: form.purchaseDate.value,
+          category: form.category.value,
+          rating: form.rating.value,
+          stars: starValueInput.value,
+          color: form.color.value,
+          comments: form.comments.value,
+        };
+
+        // Show table if hidden
+        document.getElementById("resultTable").style.display = "table";
+
+        // Append row
+        const row = document.createElement("tr");
+        Object.values(data).forEach((val) => {
+          const cell = document.createElement("td");
+          cell.innerText = val;
+          row.appendChild(cell);
+        });
+        resultTable.appendChild(row);
+
+        form.reset();
+        progress.style.width = "0%";
+        stars.forEach((s) => s.classList.remove("selected"));
+        starValueInput.value = 0;
+      });
+    </script>
+  </body>
+</html>

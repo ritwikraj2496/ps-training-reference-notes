@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessible Blog</title>
+    <style>
+      /* Global reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background: #f9f9f9;
+        color: #333;
+      }
+
+      header {
+        background: linear-gradient(90deg, #4a90e2, #357ab8);
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      header h1 {
+        margin-bottom: 0.5rem;
+      }
+
+      nav a {
+        margin: 0 10px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      nav a:hover,
+      nav a:focus {
+        text-decoration: underline;
+      }
+
+      main {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 1rem;
+        gap: 1rem;
+      }
+
+      section {
+        flex: 2;
+        min-width: 300px;
+      }
+
+      article {
+        background: white;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      article header h2 {
+        margin-bottom: 0.5rem;
+      }
+
+      article img {
+        max-width: 100%;
+        height: auto;
+        margin: 0.5rem 0;
+      }
+
+      article footer {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 0.5rem;
+      }
+
+      aside {
+        flex: 1;
+        min-width: 200px;
+        background: #fff;
+        padding: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        height: fit-content;
+      }
+
+      aside h2 {
+        margin-bottom: 0.5rem;
+      }
+
+      aside ul {
+        list-style: disc;
+        margin-left: 1.2rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background: #333;
+        color: white;
+        margin-top: 1rem;
+      }
+
+      /* Like button */
+      .like-btn {
+        background: #4a90e2;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-top: 0.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .like-btn:hover {
+        background: #357ab8;
+      }
+
+      /* Responsive layout */
+      @media (max-width: 768px) {
+        main {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My Tech Blog</h1>
+      <nav aria-label="Main navigation">
+        <a href="#">Home</a>
+        <a href="#">Articles</a>
+        <a href="#">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <!-- First article -->
+        <article>
+          <header>
+            <h2>Understanding Semantic HTML</h2>
+          </header>
+          <p>
+            Semantic HTML helps structure content meaningfully. It improves
+            accessibility and SEO while making code easier to read and maintain.
+          </p>
+          <img
+            src="https://placehold.co/300x100"
+            alt="Example of semantic HTML layout"
+          />
+          <button class="like-btn">Like (<span class="count">0</span>)</button>
+          <footer>
+            <p>By Ritwik • Aug 2025</p>
+          </footer>
+        </article>
+
+        <!-- Second article -->
+        <article>
+          <header>
+            <h2>CSS Flexbox for Responsive Design</h2>
+          </header>
+          <p>
+            Flexbox makes it easy to build flexible and responsive layouts
+            without relying on float hacks.
+          </p>
+          <img
+            src="https://placehold.co/300x100"
+            alt="Flexbox layout illustration"
+          />
+          <button class="like-btn">Like (<span class="count">0</span>)</button>
+          <footer>
+            <p>By Guest Author • Aug 2025</p>
+          </footer>
+        </article>
+      </section>
+
+      <aside>
+        <h2>Related Articles</h2>
+        <ul>
+          <li><a href="#">Why Accessibility Matters</a></li>
+          <li><a href="#">CSS Grid vs Flexbox</a></li>
+          <li><a href="#">10 Tips for Better HTML</a></li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 My Tech Blog. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // Find all like buttons
+      const likeButtons = document.querySelectorAll(".like-btn");
+
+      likeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const countSpan = button.querySelector(".count");
+          let count = parseInt(countSpan.textContent);
+
+          if (button.textContent.startsWith("Like")) {
+            count++;
+            button.innerHTML = `Unlike (<span class="count">${count}</span>)`;
+          } else {
+            count--;
+            button.innerHTML = `Like (<span class="count">${count}</span>)`;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
