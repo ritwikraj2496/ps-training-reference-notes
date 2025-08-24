@@ -71,7 +71,7 @@
 
 ## Printing in JavaScript
 
-- [Different ways of printing in JavaScript](./HTML&CSS&JavaScript/printingInJS.html)
+- [Different ways of printing in JavaScript](../ps-training-reference-notes/HTML&CSS&JavaScript/printingInJS.html)
 
 ## Variables, Data Types, and Operators
 
