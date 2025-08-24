@@ -10,7 +10,7 @@
 
 ## What is NoSQL Database?
 
-1. Not Only SQL (NoSQL) or non relational databases provides a mechanism for storage and retrieval of data other than tabular relations model used in relational databases. 
+1. Not Only SQL (NoSQL) or non relational databases provides a mechanism for storage and retrieval of data other than tabular relations model used in relational databases.
 
 2. NoSQL database doesn't use tables for storing data. It is generally used to store big data and real-time web applications.
 
@@ -141,7 +141,7 @@ Stores data in different models → Documents, Key-Value pairs, Graphs, Columns.
 
 ### Key Differences
 
-| Feature    | **ACID (SQL)**                         | **CAP (NoSQL)**                                                |
+| Feature    | **ACID (SQL)**                           | **CAP (NoSQL)**                                                  |
 | ---------- | ---------------------------------------- | ---------------------------------------------------------------- |
 | Focus      | Transactions (single database)           | Distributed systems (multiple servers)                           |
 | Purpose    | Keep data safe & correct                 | Handle scale, speed, failures                                    |
@@ -152,7 +152,7 @@ Stores data in different models → Documents, Key-Value pairs, Graphs, Columns.
 ### Quick Analogy
 
 ACID → Think of a bank. Every transaction must be 100% correct, even if it’s a bit slower.
-Use Cases → Banking, Finance, Inventory, Healthcare (where correctness > speed). 
+Use Cases → Banking, Finance, Inventory, Healthcare (where correctness > speed).
 
 CAP → Think of Facebook/Instagram. Better to show posts fast, even if some are slightly old (eventual consistency).
 Use Cases → Social media, E-commerce catalogs, IoT, Big Data (where scale + availability > strict consistency).
@@ -210,17 +210,22 @@ show collections;
 ```javascript
 // Create/Insert
 
-// In MongoDB you need not to create collection before you insert document in it. 
+// In MongoDB you need not to create collection before you insert document in it.
 // With a single command you can insert a document in the collection and the MongoDB creates that collection on the fly.
 
-// Syntax: 
+// Syntax:
 // db.collection.insertOne({key:value, key:value})
-db.students.insertOne({name:"Ritwik", company:"Sapient", age:29, course: "Java"});
+db.students.insertOne({
+  name: "Ritwik",
+  company: "Sapient",
+  age: 29,
+  course: "Java",
+});
 
 // db.collection.insertMany({key:value,key:value})
 db.students.insertMany([
-  { name: "Bob", company:"Sapient", age: 25, course: "Python" },
-  { name: "Charlie", company:"Sapient", age: 23, course: "MongoDB" }
+  { name: "Bob", company: "Sapient", age: 25, course: "Python" },
+  { name: "Charlie", company: "Sapient", age: 23, course: "MongoDB" },
 ]);
 
 // We can also create collection before we actually insert data in it. This method provides you the options that you can set while creating a collection.
@@ -235,52 +240,47 @@ db.createCollection("employees");
 
 // Read (Find)
 // Syntax: db.collection.find(query,projection)
-db.students.find();                  // All
+db.students.find(); // All
 db.students.find({ name: "Alice" }); // Filter
 
 // findOne()
 // to select only one document, we can use the findOne() method.
-db.students.findOne()
+db.students.findOne();
 
 // Update
-// Syntax: 
+// Syntax:
 // db.collection_name.updateOne(<filter>,<update>)
-db.students.updateOne(
-  { name: "Alice" },
-  { $set: { age: 23 } }
-);
+db.students.updateOne({ name: "Alice" }, { $set: { age: 23 } });
 
 // Insert if not found
 // If you would like to insert the document if it is not found, you can use the upsert option.
 
-db.students.updateOne( 
-  { title: "Post Title 5" }, 
+db.students.updateOne(
+  { title: "Post Title 5" },
   {
-    $set: 
-      {
-        title: "Post Title 5",
-        body: "Body of post.",
-        category: "Event",
-        likes: 5,
-        tags: ["news", "events"],
-        date: Date()
-      }
-  }, 
+    $set: {
+      title: "Post Title 5",
+      body: "Body of post.",
+      category: "Event",
+      likes: 5,
+      tags: ["news", "events"],
+      date: Date(),
+    },
+  },
   { upsert: true }
-)
+);
 
 // db.collection_name.updateMany(<filter>,<update>)
-db.posts.updateMany({}, { $inc: { likes: 1 } })
-
+db.posts.updateMany({}, { $inc: { likes: 1 } });
 
 // Delete - delete documents by using the methods deleteOne() or deleteMany()
-// Syntax: 
+// Syntax:
 db.students.deleteOne({ name: "Charlie" });
-db.posts.deleteMany({ category: "Technology" })
+db.posts.deleteMany({ category: "Technology" });
 
 // Delete/Drop a database
-db.dropDatabase()
-db.collection_name.drop()
+db.dropDatabase();
+db.collection_name.drop();
 ```
 
 ## Query Operators
@@ -298,6 +298,8 @@ $lt: Value is less than another value
 $lte: Value is less than or equal to another value
 $in: Value is matched within an array
 ```
+
+![comparison operators](./images/operation.png)
 
 **Logical Operators**
 
@@ -353,15 +355,14 @@ $push: Adds an element to an array
 
 ### $group
 
-This aggregation stage groups documents by the unique _id expression provided.
+This aggregation stage groups documents by the unique \_id expression provided.
 
-**Note:** Don't confuse this _id expression with the _id ObjectId provided to each document.
+**Note:** Don't confuse this \_id expression with the \_id ObjectId provided to each document.
 
 ```javascript
-db.listingsAndReviews.aggregate(
-    [ { $group : { _id : "$property_type" } } ]
-)
+db.listingsAndReviews.aggregate([{ $group: { _id: "$property_type" } }]);
 ```
+
 - This will return the distinct values from the property_type field.
 
 ### $limit
@@ -369,7 +370,7 @@ db.listingsAndReviews.aggregate(
 This aggregation stage limits the number of documents passed to the next stage.
 
 ```javascript
-db.movies.aggregate([ { $limit: 1 } ])
+db.movies.aggregate([{ $limit: 1 }]);
 ```
 
 - This will return the 1 movie from the collection.
@@ -382,19 +383,19 @@ This aggregation stage passes only the specified fields along to the next aggreg
 db.restaurants.aggregate([
   {
     $project: {
-      "name": 1,
-      "cuisine": 1,
-      "address": 1
-    }
+      name: 1,
+      cuisine: 1,
+      address: 1,
+    },
   },
   {
-    $limit: 5
-  }
-])
+    $limit: 5,
+  },
+]);
 ```
 
 - This will return the documents but only include the specified fields.
-- Notice that the _id field is also included. This field is always included unless specifically excluded.
+- Notice that the \_id field is also included. This field is always included unless specifically excluded.
 - We use a 1 to include a field and 0 to exclude a field.
 
 ### $sort
@@ -402,20 +403,20 @@ db.restaurants.aggregate([
 This aggregation stage groups sorts all documents in the specified sort order.
 
 ```javascript
-db.listingsAndReviews.aggregate([ 
-  { 
-    $sort: { "accommodates": -1 } 
+db.listingsAndReviews.aggregate([
+  {
+    $sort: { accommodates: -1 },
   },
   {
     $project: {
-      "name": 1,
-      "accommodates": 1
-    }
+      name: 1,
+      accommodates: 1,
+    },
   },
   {
-    $limit: 5
-  }
-])
+    $limit: 5,
+  },
+]);
 ```
 
 - This will return the documents sorted in descending order by the accommodates field.
@@ -428,15 +429,17 @@ This aggregation stage behaves like a find. It will filter documents that match 
 **Note:** Using $match early in the pipeline can improve performance since it limits the number of documents the next stages must process.
 
 ```javascript
-db.listingsAndReviews.aggregate([ 
-  { $match : { property_type : "House" } },
+db.listingsAndReviews.aggregate([
+  { $match: { property_type: "House" } },
   { $limit: 2 },
-  { $project: {
-    "name": 1,
-    "bedrooms": 1,
-    "price": 1
-  }}
-])
+  {
+    $project: {
+      name: 1,
+      bedrooms: 1,
+      price: 1,
+    },
+  },
+]);
 ```
 
 - This will only return documents that have the property_type of "House".
@@ -449,19 +452,19 @@ This aggregation stage adds new fields to documents.
 db.restaurants.aggregate([
   {
     $addFields: {
-      avgGrade: { $avg: "$grades.score" }
-    }
+      avgGrade: { $avg: "$grades.score" },
+    },
   },
   {
     $project: {
-      "name": 1,
-      "avgGrade": 1
-    }
+      name: 1,
+      avgGrade: 1,
+    },
   },
   {
-    $limit: 5
-  }
-])
+    $limit: 5,
+  },
+]);
 ```
 
 - This will return the documents along with a new field, avgGrade, which will contain the average of each restaurants grades.score.
@@ -473,12 +476,12 @@ This aggregation stage counts the total amount of documents passed from the prev
 ```javascript
 db.restaurants.aggregate([
   {
-    $match: { "cuisine": "Chinese" }
+    $match: { cuisine: "Chinese" },
   },
   {
-    $count: "totalChinese"
-  }
-])
+    $count: "totalChinese",
+  },
+]);
 ```
 
 - This will return the number of documents at the $count stage as a field called "totalChinese".
@@ -499,14 +502,10 @@ db.students.find().sort({ age: 1 });
 db.students.find().sort({ age: -1 });
 
 // Count students per course
-db.students.aggregate([
-  { $group: { _id: "$course", total: { $count: {} } } }
-]);
+db.students.aggregate([{ $group: { _id: "$course", total: { $count: {} } } }]);
 
 // Show name and course only
-db.students.aggregate([
-  { $project: { name: 1, course: 1 } }
-]);
+db.students.aggregate([{ $project: { name: 1, course: 1 } }]);
 ```
 
 ## Indexing Overview: Single Field & Compound
