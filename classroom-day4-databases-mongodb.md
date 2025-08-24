@@ -174,7 +174,69 @@ Use Cases → Social media, E-commerce catalogs, IoT, Big Data (where scale + av
 - Content management systems.
 
 ## Setup & Creating Collections
-## CRUD Operations (insertOne, find, updateOne, deleteOne)
+
+### SQL
+
+![sql example](./images/sqlexample.png)
+
+### NoSQL
+
+![mongodb example](./images/mongoexample.png)
+
+### Setup and Creating Collections
+
+Steps:
+
+- Install MongoDB (Community Edition - Compass).
+- Start MongoDB service.
+- Open Mongo Shell (mongosh or mongo)
+
+```javascript
+// Show all databases
+show dbs;
+
+// Create/switch database - if the database doesn't exists, above command creates a new database otherwise opens the existing one.
+use sapientdb;
+
+// Create a collection
+db.createCollection("students");
+
+// Check collections - won't show until there is atleast one document inserted
+show collections;
+
+// Delete/Drop a database
+db.dropDatabase()
+// or db.collection_name.drop()
+```
+
+## CRUD Operations
+
+```javascript
+// Create/Insert
+
+// In MongoDB you need not to create collection before you insert document in it. With a single command you can insert a document in the collection and the MongoDB creates that collection on the fly.
+
+// Syntax: db.collection_name.insert({key:value, key:value…})
+
+db.students.insertOne({name:"Ritwik", company:"Sapient", age:29, course: "Java"});
+
+db.students.insertMany([
+  { name: "Bob", company:"Sapient", age: 25, course: "Python" },
+  { name: "Charlie", company:"Sapient", age: 23, course: "MongoDB" }
+]);
+
+// We can also create collection before we actually insert data in it. This method provides you the options that you can set while creating a collection.
+
+// Syntax: db.createCollection(name, options)
+
+// name is the collection name
+// options is an optional field that we can use to specify certain parameters such as size, max number of documents etc. in the collection.
+
+db.createCollection("employees");
+
+// MongoDB stores data records as BSON documents. BSON is a binary representation of JSON documents.
+```
+
 ## Query Modifiers: limit, skip, sort
 ## Indexing Overview: Single Field & Compound
 ## Aggregation Basics ($match, $group, $project)
