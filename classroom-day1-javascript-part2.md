@@ -1084,3 +1084,6 @@ Add a “Back” button that uses history.back().
 - Different events (focus, blur, submit, bubbling in table) can be observed.
 - Footer shows → “You are using Chrome on Windows” (from BOM).
 
+**Solution:**
+
+- [Student Registration & Dashboard Application](./HTML&CSS&JavaScript/studentRegistrationDashboard.html)
