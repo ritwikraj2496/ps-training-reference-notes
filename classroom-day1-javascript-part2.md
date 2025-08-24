@@ -606,8 +606,10 @@ console.log("City:", selectedCity); // Mumbai
    - Show alert "Login successful!" if valid.
 2. Create a form with a checkbox "Accept Terms & Conditions".
    - Prevent form submission unless it is checked.
-3.  Create a dropdown of cities.
-   - When the form is submitted, show "You selected: <city>".
+3. Create a dropdown of cities.
+
+- When the form is submitted, show "You selected: <city>".
+
 4. Build a newsletter form with:
    - Text input for email.
    - Checkbox for subscription.
@@ -758,8 +760,7 @@ Adds the newly created element inside a parent.
 
 ```javascript
 <script>
-  let div = document.createElement("div");
-  div.innerText = "Appended Div!";
+  let div = document.createElement("div"); div.innerText = "Appended Div!";
   document.body.appendChild(div);
 </script>
 ```
@@ -768,8 +769,7 @@ Adds the newly created element inside a parent.
 
 ```javascript
 <script>
-  let li = document.createElement("li");
-  li.innerText = "Pineapple";
+  let li = document.createElement("li"); li.innerText = "Pineapple";
   document.getElementById("list").appendChild(li);
 </script>
 ```
@@ -897,7 +897,7 @@ Syntax:
 
 ```javascript
 element.addEventListener("eventName", functionToRun);
-``` 
+```
 
 **Example 1: Button Click with Event Listener**
 
@@ -1065,7 +1065,7 @@ The app should allow users (students) to fill a registration form, validate inpu
 12. JS Event Flow (Bubbling vs Capturing)
 
 - Demonstrate event bubbling by adding a click listener on the table that also detects which student row was clicked.
-(Optional: Show capturing by adding listeners with true flag).
+  (Optional: Show capturing by adding listeners with true flag).
 
 13. Intro to BOM
 
@@ -1086,4 +1086,4 @@ Add a “Back” button that uses history.back().
 
 **Solution:**
 
-- [Student Registration & Dashboard Application](./HTML&CSS&JavaScript/studentRegistrationDashboard.html)
+- [Student Registration & Dashboard Application](./HTML-CSS-JavaScript/studentRegistrationDashboard.html)

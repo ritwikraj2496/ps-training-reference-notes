@@ -71,7 +71,7 @@
 
 ## Printing in JavaScript
 
-- [Different ways of printing in JavaScript](../ps-training-reference-notes/HTML&CSS&JavaScript/printingInJS.html)
+- [Different ways of printing in JavaScript](./HTML-CSS-JavaScript/printingInJS.html)
 
 ## Variables, Data Types, and Operators
 
@@ -80,7 +80,7 @@
 - Used to store data.
 - Declared with var, let, or const.
 
-- [Types of Declarations and its Differences](./HTML&CSS&JavaScript/typesOfDeclarationsJS.html)
+- [Types of Declarations and its Differences](./HTML-CSS-JavaScript/typesOfDeclarationsJS.html)
 
 **Data Types**
 
@@ -134,24 +134,24 @@ switch(day) {
 
 ## Loops in JS
 
-- [Types of FOR loops in JavaScript](./HTML&CSS&JavaScript/typesOfForLoopJS.html)
+- [Types of FOR loops in JavaScript](./HTML-CSS-JavaScript/typesOfForLoopJS.html)
 
 ## Arrays in JS
 
-- [Creation of Array and Different Types of Array Methods](./HTML&CSS&JavaScript/jsArrayMethods.html)
+- [Creation of Array and Different Types of Array Methods](./HTML-CSS-JavaScript/jsArrayMethods.html)
 
 ## Strings in JS
 
-- [Creation of String and Different Types of String Methods](./HTML&CSS&JavaScript/jsStringmethods.html)
+- [Creation of String and Different Types of String Methods](./HTML-CSS-JavaScript/jsStringmethods.html)
 
 ## Dates (Date object basics: creation, formatting)
 
-- [Developing Digital Clock and Understanding Date Methods](./HTML&CSS&JavaScript/digitalClock.html)
+- [Developing Digital Clock and Understanding Date Methods](./HTML-CSS-JavaScript/digitalClock.html)
 
 ## Defining, Calling Functions, Function Expressions & Hoisting
 
-- [Difference ways of writing Functions in JavaScript](./HTML&CSS&JavaScript/typesOfFunctionsJS.html)
+- [Difference ways of writing Functions in JavaScript](./HTML-CSS-JavaScript/typesOfFunctionsJS.html)
 
 ## Document Object Model (DOM Basics)
 
-- [To Do List application using JS DOM concept](./HTML&CSS&JavaScript/toDoListBasic.html)
+- [To Do List application using JS DOM concept](./HTML-CSS-JavaScript/toDoListBasic.html)
