@@ -161,21 +161,21 @@ switch(day) {
 ## Hoisting in JavaScript
 
 ```javascript
-// console.log(a); //works and prints undefined, no error
+console.log(a); //works and prints undefined, no error
 
-// var a = 10; //var supports hoisting
+var a = 10; //var supports hoisting
 ```
 
 ```javascript   
-// console.log(a); //throws error
+console.log(a); //throws error
 
-// let a = 10; //as let doesn't support hoisting
+let a = 10; //as let doesn't support hoisting
 ```
 
 ```javascript   
-// console.log(a); //throws error
+console.log(a); //throws error
 
-// const a = 10; //as const doesn't support hoisting
+const a = 10; //as const doesn't support hoisting
 ```
 
 ```javascript
