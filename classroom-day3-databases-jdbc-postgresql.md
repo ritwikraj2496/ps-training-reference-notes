@@ -64,6 +64,15 @@
 - Attribute → Properties of an entity (name, age).
 - Relationship → How entities connect (Student enrolls in Course).
 
-**Example:**
-Entities: Student (id, name, email) and Course (id, name, credits)
-Relationship: Student Enrolls in Course (many-to-many).
+**Symbols Used in ER Model:**
+
+- ER Model is used to model the logical view of the system from a data perspective which consists of these symbols:
+
+  - Rectangles: Rectangles represent entities in the ER Model.
+  - Ellipses: Ellipses represent attributes in the ER Model.
+  - Diamond: Diamonds represent relationships among Entities.
+  - Lines: Lines represent attributes to entities and entity sets with other relationship types.
+  - Double Ellipse: Double ellipses represent multi-valued Attributes, such as a student's multiple phone numbers
+  - Double Rectangle: Represents weak entities, which depend on other entities for identification.
+
+![symbols](./images/erdsymbols.webp)
