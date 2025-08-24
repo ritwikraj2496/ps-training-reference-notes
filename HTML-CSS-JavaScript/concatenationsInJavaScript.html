@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Concatenations in JS</title>
+  </head>
+  <body>
+    <script>
+      // ***Understanding concatenation and variables in JavaScript***
+
+      // Existing values
+      let a = 20;
+      let b = 45;
+      let name = "Ritwik";
+
+      // Template literal (recommended modern way)
+      document.write(`Sum value is ${a + b} and my name is ${name}<br>`); // Output: Sum value is 65 and my name is Ritwik
+
+      // String + number = string (due to implicit coercion)
+      console.log("Hi" + a + b); // Output: "Hi2045" — left-to-right coercion
+      console.log("a" + a + "b" + b); // Output: "a20b45"
+      console.log(a + b + "a" + "b"); // Output: "65ab"
+      console.log(a + b + a + b); // Output: 130 — all numbers, pure addition
+      console.log(a + b + "a" + a); // Output: "65a20"
+
+      // Mixing with operators like `-` (subtraction doesn’t work on strings)
+      console.log("a" + a + b - 3); // Output: NaN — "a2045" is not a number
+      console.log("a" + "b" + a - 2); // Output: NaN — "ab20" is not a number
+      console.log(10 + a + "a" + 20 + "b" - 10); // Output: NaN — ends up trying "30a20b" - 10
+
+      // Valid arithmetic still works with pure numbers
+      console.log(a + b - a - 2); // Output: 43
+
+      console.log("@#####################");
+
+      // Edge Cases with undefined and null
+      let x;
+      let y = null;
+
+      console.log("Value of x is: " + x); // Output: "Value of x is: undefined"
+      console.log("Value of y is: " + y); // Output: "Value of y is: null"
+      console.log(x + 10); // Output: NaN — undefined + number
+      console.log(y + 10); // Output: 10 — null coerces to 0
+
+      console.log("@#####################");
+
+      // Explicit conversion using String() and Number()
+      let z = 100;
+      console.log("Explicit: " + String(z)); // Output: "Explicit: 100"
+
+      let strNum = "25";
+      console.log(Number(strNum) + 5); // Output: 30
+
+      console.log("@#####################");
+
+      // Template literals with multi-line and expressions
+      let age = 27;
+      let msg = `Hello,
+My name is ${name},
+And I am ${age} years old.`;
+      console.log(msg);
+      /* Output:
+Hello,
+My name is Ritwik,
+And I am 27 years old.
+*/
+
+      console.log("@#####################");
+
+      // Type coercion in conditional checks
+      console.log("20" == 20); // true — loose equality, types are coerced
+      console.log("20" === 20); // false — strict equality, types must match
+
+      console.log("@#####################");
+
+      // Adding Boolean or null values
+      console.log(true + 1); // 2 — true is treated as 1
+      console.log(false + 10); // 10 — false is 0
+      console.log(null + 5); // 5 — null coerces to 0
+      console.log(undefined + 5); // NaN — undefined is not a number
+
+      console.log("@#####################");
+
+      // Mixing + and - with strings
+      console.log("100" + 20 - 10); // 1002010 — "100" + 20 = "10020", then "10020" - 10 = NaN
+      console.log(100 + "20" - 10); // 10020 - 10 = NaN
+      console.log(100 + 20 + "abc"); // Output: "120abc" — numeric part first
+    </script>
+  </body>
+</html>

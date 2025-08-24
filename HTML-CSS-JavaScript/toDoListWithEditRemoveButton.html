@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TO DO LIST WITH EDIT AND REMOVE BUTTON</title>
+  </head>
+  <body>
+    <div>
+      <h1>TO DO LIST WITH EDIT AND REMOVE BUTTON</h1>
+      <div>
+        <form action="">
+          <input type="text" id="box" placeholder="All tasks here" />
+          <br />
+          <br />
+          <input type="button" value="Enter/Save" onclick="addItem()" />
+        </form>
+      </div>
+      <div>
+        <ul id="listItem"></ul>
+      </div>
+    </div>
+    <script>
+      function addItem() {
+        let item = document.getElementById("box");
+        let liItem = document.getElementById("listItem");
+
+        if (item.value != "") {
+          // Create a container div for the list item and buttons
+          let container = document.createElement("div");
+          container.style.display = "flex";
+          container.style.justifyContent = "flex-start";
+          container.style.gap = "5%";
+
+          // Create the list item (li) and add the input text
+          let makeLi = document.createElement("li");
+          makeLi.appendChild(document.createTextNode(item.value));
+
+          // Create the "Remove" button
+          let makeRemoveButton = document.createElement("input");
+          makeRemoveButton.setAttribute("type", "button");
+          makeRemoveButton.setAttribute("value", "Remove");
+
+          // Create the "Edit" button
+          let makeEditButton = document.createElement("input");
+          makeEditButton.setAttribute("type", "button");
+          makeEditButton.setAttribute("value", "Edit");
+
+          // Append the li and both buttons to the container
+          container.appendChild(makeLi);
+          container.appendChild(makeEditButton);
+          container.appendChild(makeRemoveButton);
+
+          // Append the container to the ul
+          liItem.appendChild(container);
+
+          // Clear the input box
+          item.value = "";
+
+          // Add functionality to the Remove button
+          makeRemoveButton.onclick = function () {
+            container.parentNode.removeChild(container);
+          };
+
+          // Add functionality to the Edit button
+          makeEditButton.onclick = function () {
+            // Create an input box pre-filled with the current list item value
+            let editInput = document.createElement("input");
+            editInput.setAttribute("type", "text");
+            editInput.value = makeLi.textContent;
+
+            // Create a "Save" button
+            let saveButton = document.createElement("input");
+            saveButton.setAttribute("type", "button");
+            saveButton.setAttribute("value", "Save");
+
+            // Replace the li and Edit button with the input box and Save button
+            container.replaceChild(editInput, makeLi);
+            container.replaceChild(saveButton, makeEditButton);
+
+            // When Save is clicked, update the list item with the new value
+            saveButton.onclick = function () {
+              // Update the list item with the edited value
+              makeLi.textContent = editInput.value;
+
+              // Replace the input box and Save button back with the updated list item and Edit button
+              container.replaceChild(makeLi, editInput);
+              container.replaceChild(makeEditButton, saveButton);
+            };
+          };
+        } else {
+          alert("Please add the tasks to the item box.");
+        }
+      }
+    </script>
+  </body>
+</html>

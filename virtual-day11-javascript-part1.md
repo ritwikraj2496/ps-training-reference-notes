@@ -73,6 +73,8 @@
 
 - [Different ways of printing in JavaScript](./HTML-CSS-JavaScript/printingInJS.html)
 
+- [Concatenations in Javascript](./HTML-CSS-JavaScript/concatenationsInJavaScript.html)
+
 ## Variables, Data Types, and Operators
 
 **Variables**
@@ -93,7 +95,7 @@
 
 **Operators**
 
-- Arithmetic: + - * / % **
+- Arithmetic: + - \* / % \*\*
 - Comparison: == === != > <
 - Logical: && || !
 
@@ -104,7 +106,7 @@ let name = "Ritwik";
 let age = 25;
 let isTrainer = true;
 
-console.log(name + " is " + age + " years old."); 
+console.log(name + " is " + age + " years old.");
 console.log(age > 18 && isTrainer); // true
 ```
 
@@ -125,10 +127,15 @@ if (age >= 18) {
 
 ```javascript
 let day = "Mon";
-switch(day) {
-  case "Mon": console.log("Start of week"); break;
-  case "Fri": console.log("Weekend soon"); break;
-  default: console.log("Normal day");
+switch (day) {
+  case "Mon":
+    console.log("Start of week");
+    break;
+  case "Fri":
+    console.log("Weekend soon");
+    break;
+  default:
+    console.log("Normal day");
 }
 ```
 
@@ -156,7 +163,11 @@ switch(day) {
 
 - [To Do List application using JS DOM concept](./HTML-CSS-JavaScript/toDoListBasic.html)
 
+- [To Do List application with edit and remove button using JS DOM concept](./HTML-CSS-JavaScript/toDoListWithEditRemoveButton.html)
+
 - [Customer Form with Delete Button using JS DOM concept](./HTML-CSS-JavaScript/customerFormWithDelete.html)
+
+- [Customer Form using Bootstrap and JS DOM concept](./HTML-CSS-JavaScript/customerFormWithBootstrap.html)
 
 ## Hoisting in JavaScript
 
@@ -166,13 +177,13 @@ console.log(a); //works and prints undefined, no error
 var a = 10; //var supports hoisting
 ```
 
-```javascript   
+```javascript
 console.log(a); //throws error
 
 let a = 10; //as let doesn't support hoisting
 ```
 
-```javascript   
+```javascript
 console.log(a); //throws error
 
 const a = 10; //as const doesn't support hoisting
@@ -181,8 +192,9 @@ const a = 10; //as const doesn't support hoisting
 ```javascript
 greet();
 
-function greet() {  //hoisting works for normal functions
-    console.log("Hello from a normal function!");
+function greet() {
+  //hoisting works for normal functions
+  console.log("Hello from a normal function!");
 }
 ```
 
@@ -191,6 +203,6 @@ function greet() {  //hoisting works for normal functions
 sayHello();
 
 let sayHello = function () {
-    console.log("Hello from a function expression!");
+  console.log("Hello from a function expression!");
 };
 ```
