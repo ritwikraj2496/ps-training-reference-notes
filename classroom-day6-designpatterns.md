@@ -115,6 +115,8 @@ public class Main {
 }
 ```
 
+---
+
 ### Factory Pattern (Creational)
 
 **What is it?**
@@ -208,6 +210,8 @@ public class Main {
     }
 }
 ```
+
+---
 
 ### Builder Pattern (Creational)
 
@@ -313,6 +317,8 @@ public class Main {
 }
 ```
 
+---
+
 ### Prototype Pattern (Creational)
 
 **What is it?**
@@ -384,6 +390,8 @@ public class Main {
     }
 }
 ```
+
+---
 
 ### Adapter Pattern (Structural)
 
@@ -464,6 +472,8 @@ public class Main {
 }
 ```
 
+---
+
 ### Decorator Pattern (Structural)
 
 **What is it?**
@@ -536,6 +546,8 @@ public class Main {
     }
 }
 ```
+
+---
 
 ### Observer Pattern (Behavioral)
 
@@ -643,6 +655,8 @@ public class Main {
 }
 ```
 
+---
+
 ### Iterator Pattern (Behavioral)
 
 **What is it?**
@@ -713,3 +727,5 @@ public class Main {
     }
 }
 ```
+
+---
