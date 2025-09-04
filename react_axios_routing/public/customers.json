@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Ritwik",
+    "email": "ritwik@gmail.com",
+    "phone": "123-456-7890",
+    "address": "123 Main St, Springfield, USA"
+  },
+  {
+    "name": "Raman",
+    "email": "raman@gmail.com",
+    "phone": "123-456-7890",
+    "address": "123 Main St, Springfield, USA"
+  },
+  {
+    "name": "Ravi",
+    "email": "ravi@gmail.com",
+    "phone": "123-456-7890",
+    "address": "123 Main St, Springfield, USA"
+  }
+]
